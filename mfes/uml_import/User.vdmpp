@@ -1,0 +1,12 @@
+class User
+instance variables
+  null:set of (Comment);
+  null:[Comment];
+  null:set of (Post);
+  null:set of (Post);
+  BirthdayDate:seq of (char);
+  Email:seq of (char);
+  Name:seq of (char);
+  Password:seq of (char);
+
+end User
