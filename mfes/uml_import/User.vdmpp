@@ -1,12 +1,13 @@
 class User
 instance variables
-  null:set of (Comment);
-  null:[Comment];
-  null:set of (Post);
-  null:set of (Post);
+  Comments:set of (Comment);
+  Posts:set of (Post);
+  Friends: set of(User);
   BirthdayDate:seq of (char);
   Email:seq of (char);
   Name:seq of (char);
   Password:seq of (char);
+  
+  
 
 end User

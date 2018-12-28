@@ -1,6 +1,6 @@
 class Post
 instance variables
-  null:set of (Comment);
+  Comments:set of (Comment);
   Date:seq of (char);
   Content:seq of (char);
 
