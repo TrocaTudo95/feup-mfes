@@ -1,0 +1,6 @@
+class Comment
+instance variables
+  Content:seq of (char);
+  Date:seq of (char);
+
+end Comment

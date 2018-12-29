@@ -16,6 +16,6 @@ instance variables
   Password:String;
   
 operations
- 	public User(name: String) user: User ==
-	(	Name := name;return self) 
+ 	public User(email: String) user: User ==
+	(	Email := email;return self) 
 end User
