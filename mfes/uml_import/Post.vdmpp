@@ -1,7 +1,14 @@
 class Post
+types 
+	public String = seq of char;
+	
 instance variables
-  Comments:set of (Comment);
+  Comments:set of (Comment) := {};
   Date:seq of (char);
-  Content:seq of (char);
+  Content:String;
+  
+  operations
+ 	public Post(content: String) p: Post ==
+	(	Content := content; return self) 
 
 end Post

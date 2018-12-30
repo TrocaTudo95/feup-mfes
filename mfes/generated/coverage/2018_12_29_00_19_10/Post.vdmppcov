@@ -1,7 +1,0 @@
-class Post
-instance variables
-  Comments:set of (Comment);
-  Date:seq of (char);
-  Content:seq of (char);
-
-end Post

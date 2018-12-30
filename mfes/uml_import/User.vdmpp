@@ -7,7 +7,7 @@ types
 	
 instance variables	
   Comments:set of (Comment) := {};
-  Posts:set of (Post) := {};
+  private Posts:set of (Post) := {};
   Friends: set of(User) := {};
   
   Birthday:Date;
@@ -17,5 +17,13 @@ instance variables
   
 operations
  	public User(name: String) user: User ==
-	(	Name := name;return self) 
+	(	Name := name; 
+		return self) 
+	post Comments = {} and Posts = {} and Friends ={} and Name = name; 
+	
+	public addPost(p:Post) ==
+  Posts := {p} union Posts
+ 	post Posts = {p} union Posts~;
+	
+	
 end User
