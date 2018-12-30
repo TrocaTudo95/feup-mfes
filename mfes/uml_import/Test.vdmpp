@@ -1,0 +1,20 @@
+class Test
+	 instance variables
+	 u : User := new User("Sofia");
+	 p : Post := new Post("Olá!");
+	 
+	 operations
+	 private assertTrue: bool ==> ()
+	 assertTrue(cond) == return
+	 pre cond;
+	
+	 private addPost()==
+	 (
+	 	u.addPost(p);
+	 );
+	 
+	 public static main() ==
+	 (new Test().addPost();
+	
+	 );
+end Test
