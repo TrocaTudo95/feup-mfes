@@ -4,11 +4,14 @@ types
 	
 instance variables
   Comments:set of (Comment) := {};
-  Date:seq of (char);
   Content:String;
   
   operations
  	public Post(content: String) p: Post ==
-	(	Content := content; return self) 
+	(	Content := content; return self);
+	
+	public addComment(c:Comment) ==
+  Comments := {c} union Comments
+ 	post Comments = {c} union Comments~;
 
 end Post
