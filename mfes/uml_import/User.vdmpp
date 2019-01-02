@@ -1,6 +1,6 @@
 class User
 types 
-	public String = seq of char;
+	public String = seq1 of char; /* to not allow null sequences*/
 			public Date :: day:nat
 									 month:nat
 									 year:nat;
@@ -24,18 +24,22 @@ operations
 		birthday := b;
 		email := e;
 		return self) 
+		pre len n >0
 	post comments = {} and posts = {} and friends ={} and name = name; 
 	
 	public getName() n : String ==
 	return name
+	pre true
 	post n=name;
 	
 	public getBirthday() d: Date ==
 	return birthday
+	pre true
 	post d=birthday;
 	
 	public getEmail() e : String ==
 	return email
+	pre true
 	post e=email;
 	
 	public addPost(p:Post) ==
@@ -44,6 +48,7 @@ operations
  	
  	public addFriend(f:User) ==
  	friends := {f} union friends
+ 	pre card friends < 500
  	post friends = {f} union friends~;
  	
  	public removeFriend(f:User) ==
