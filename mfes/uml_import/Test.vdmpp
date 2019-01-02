@@ -1,20 +1,26 @@
 class Test
+	types 
+		public String = seq of char;
+
 	 instance variables
-	 u : User := new User("Sofia");
-	 p : Post := new Post("Olá!");
-	 
+		 u : User := new User("Sofia",mk_User`Date(1,1,2019),"sofia@gmail.com");
+		 p : Post := new Post("Olá!");
+		 
 	 operations
-	 private assertTrue: bool ==> ()
-	 assertTrue(cond) == return
-	 pre cond;
+		 private assertTrue: bool ==> ()
+		 assertTrue(cond) == return
+		 pre cond;
+		
+		 private addPost()==
+		 (
+			assertTrue(u.getName() = "Sofia");
+			assertTrue(u.getBirthday() = mk_User`Date(1,1,2019));
+			assertTrue(u.getEmail() = "sofia@gmail.com");
+		 	u.addPost(p);
+		 );
+		 
+		 public static main() ==
+		 (new Test().addPost();
 	
-	 private addPost()==
-	 (
-	 	u.addPost(p);
-	 );
-	 
-	 public static main() ==
-	 (new Test().addPost();
-	
-	 );
+		 );
 end Test

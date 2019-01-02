@@ -1,25 +1,36 @@
 class User
 types 
 	public String = seq of char;
-	public Date :: year:nat
-								 month:nat
-								 day:nat;
+			public Date :: day:nat
+									 month:nat
+									 year:nat;
+	
 	
 instance variables	
   Comments:set of (Comment) := {};
-  private Posts:set of (Post) := {};
+  Posts:set of (Post) := {};
   Friends: set of(User) := {};
   
   Birthday:Date;
   Email:String;
   Name:String;
-  Password:String;
   
 operations
- 	public User(name: String) user: User ==
+ 	public User(name: String, birthday: Date, email: String) user: User ==
 	(	Name := name; 
+		Birthday := birthday;
+		Email := email;
 		return self) 
 	post Comments = {} and Posts = {} and Friends ={} and Name = name; 
+	
+	public getName() n : String ==
+	return Name;
+	
+	public getBirthday() d: Date ==
+	return Birthday;
+	
+	public getEmail() e : String ==
+	return Email;
 	
 	public addPost(p:Post) ==
   Posts := {p} union Posts
