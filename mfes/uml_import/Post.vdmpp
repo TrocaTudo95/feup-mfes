@@ -8,7 +8,8 @@ instance variables
   
   operations
  	public Post(c: String) p: Post ==
-	(	content := content; return self);
+	(	content := c; return self)
+	post p= self;
 	
 	public addComment(c:Comment) ==
   comments := {c} union comments
