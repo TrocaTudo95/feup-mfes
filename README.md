@@ -1,6 +1,6 @@
 # MFES-FEUP
 
-- [ ] Comentário
+- [ ] Comentário (Sofia)
 - [ ] Like
 - [ ] ditar informação do perfil
 - [ ] Editar Post
