@@ -9,6 +9,9 @@ instance variables
   Comments:set of (Comment) := {};
   private Posts:set of (Post) := {};
   Friends: set of(User) := {};
+  StarFriends : set of(User) := {};
+  Family : set of(User) := {};
+  BloquedUsers : set of(User) := {};
   
   Birthday:Date;
   Email:String;
@@ -24,6 +27,14 @@ operations
 	public addPost(p:Post) ==
   Posts := {p} union Posts
  	post Posts = {p} union Posts~;
+ 	
+ 	public addFriend(f:User) ==
+ 	Friends := {f} union Friends
+ 	post Friends = {f} union Friends~;
+ 	
+ 	public removeFriend(f:User) ==
+ 	Friends := Friends \{f}
+ 	post Friends =Friends~ \{f};
 	
 	
 end User
