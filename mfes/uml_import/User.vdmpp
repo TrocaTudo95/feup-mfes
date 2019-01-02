@@ -7,45 +7,48 @@ types
 	
 	
 instance variables	
-  Comments:set of (Comment) := {};
-  Posts:set of (Post) := {};
-  Friends: set of(User) := {};
-  StarFriends : set of(User) := {};
-  Family : set of(User) := {};
-  BloquedUsers : set of(User) := {};
+  comments:set of (Comment) := {};
+  posts:set of (Post) := {};
+  friends: set of(User) := {};
+  starFriends : set of(User) := {};
+  family : set of(User) := {};
+  bloquedUsers : set of(User) := {};
   
-  Birthday:Date;
-  Email:String;
-  Name:String;
+  birthday:Date;
+  email:String;
+  name:String;
   
 operations
- 	public User(name: String, birthday: Date, email: String) user: User ==
-	(	Name := name; 
-		Birthday := birthday;
-		Email := email;
+ 	public User(n: String, b: Date, e: String) u: User ==
+	(	name := n; 
+		birthday := b;
+		email := e;
 		return self) 
-	post Comments = {} and Posts = {} and Friends ={} and Name = name; 
+	post comments = {} and posts = {} and friends ={} and name = name; 
 	
 	public getName() n : String ==
-	return Name;
+	return name
+	post n=name;
 	
 	public getBirthday() d: Date ==
-	return Birthday;
+	return birthday
+	post d=birthday;
 	
 	public getEmail() e : String ==
-	return Email;
+	return email
+	post e=email;
 	
 	public addPost(p:Post) ==
-  Posts := {p} union Posts
- 	post Posts = {p} union Posts~;
+  posts := {p} union posts
+ 	post posts = {p} union posts~;
  	
  	public addFriend(f:User) ==
- 	Friends := {f} union Friends
- 	post Friends = {f} union Friends~;
+ 	friends := {f} union friends
+ 	post friends = {f} union friends~;
  	
  	public removeFriend(f:User) ==
- 	Friends := Friends \{f}
- 	post Friends =Friends~ \{f};
+ 	friends := friends \{f}
+ 	post friends =friends~ \{f};
 	
 	
 end User
