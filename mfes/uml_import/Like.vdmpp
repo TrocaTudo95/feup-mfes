@@ -1,5 +1,5 @@
 class Like
 instance variables
-  Date:seq of (char);
+  date:seq of (char);
 
 end Like

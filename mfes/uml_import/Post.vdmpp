@@ -3,15 +3,15 @@ types
 	public String = seq of char;
 	
 instance variables
-  Comments:set of (Comment) := {};
-  Content:String;
+  comments:set of (Comment) := {};
+  content:String;
   
   operations
- 	public Post(content: String) p: Post ==
-	(	Content := content; return self);
+ 	public Post(c: String) p: Post ==
+	(	content := content; return self);
 	
 	public addComment(c:Comment) ==
-  Comments := {c} union Comments
- 	post Comments = {c} union Comments~;
+  comments := {c} union comments
+ 	post comments = {c} union comments~;
 
 end Post

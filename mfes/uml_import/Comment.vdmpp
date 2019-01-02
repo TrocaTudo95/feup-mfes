@@ -1,5 +1,5 @@
 class Comment
 instance variables
-  Content:seq of (char);
+  content:seq of (char);
 
 end Comment
