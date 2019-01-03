@@ -1,11 +1,11 @@
 # MFES-FEUP
 
 - [ ] Comentário (Sofia)
-- [ ] Like(zé)
-- [ ] ditar informação do perfil
+- [x] Like
+- [ ] Editar informação do perfil
 - [ ] Editar Post
 - [ ] Editar Comentário
-- [ ] Remover Like
+- [x] Remover Like
 - [ ] Remover Comentário
 - [ ] Remover Post
 - [ ] Permissoes de amigos 
