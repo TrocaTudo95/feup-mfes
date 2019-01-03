@@ -9,6 +9,7 @@ types
 instance variables	
   posts:set of Post := {};
   friends: set of(User) := {};
+  pendentFriendRequests: set of(User) := {};
   starFriends : set of(User) := {};
   family : set of(User) := {};
   bloquedUsers : set of(User) := {};
@@ -44,14 +45,34 @@ operations
 	public addPost(p:Post) ==
   posts := {p} union posts
  	post posts = {p} union posts~;
-	
+ 	
+ 	public acceptRequest(f:User) ==
+ 	(friends := {f} union friends;
+ 	f.addFriend(self);
+ 	pendentFriendRequests := pendentFriendRequests \{f}
+ 	)
+ 	pre card friends < 500
+ 	post friends = {f} union friends~ and pendentFriendRequests =pendentFriendRequests~ \{f};
+ 	
+ 	public sendFriendRequest(f:User) ==
+ 	f.addFriendRequest(self)
+ 	pre true
+ 	post true;
+ 	
  	public addFriend(f:User) ==
  	friends := {f} union friends
  	pre card friends < 500
  	post friends = {f} union friends~;
  	
+ 	
+ 	public addFriendRequest(f:User) ==
+ 	pendentFriendRequests := {f} union pendentFriendRequests
+ 	pre true
+ 	post pendentFriendRequests = {f} union pendentFriendRequests~;
+ 	
  	public removeFriend(f:User) ==
- 	friends := friends \{f}
+ 	is not yet specified
+-- 	friends := friends \{f}
  	post friends =friends~ \{f};
 
 functions
