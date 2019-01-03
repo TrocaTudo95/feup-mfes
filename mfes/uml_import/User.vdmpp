@@ -26,7 +26,7 @@ operations
 		email := e;
 		return self) 
 		pre len n >0
-	post comments = {} and posts = {} and friends ={} and name = name; 
+	post comments = {} and posts = {} and friends ={} and name = name and pendentFriendRequests={}; 
 	
 	public getName() n : String ==
 	return name
@@ -71,10 +71,25 @@ operations
  	pre true
  	post pendentFriendRequests = {f} union pendentFriendRequests~;
  	
- 	public removeFriend(f:User) ==
- 	is not yet specified
--- 	friends := friends \{f}
+ 	public unfriend( f:User) ==
+ 	(removeFriend(f);
+ 	f.removeFriend(self);
+ 	)
  	post friends =friends~ \{f};
+ 	
+ 	public removeFriend(f:User) ==
+ 	friends := friends \{f}
+ 	post friends =friends~ \{f};
+ 	
+ 	public getNumberOfFriends() n:nat ==
+ 	return card friends
+ 	pre true
+ 	post n= card friends;
+ 	
+ 	public getNumberOfPendentRequests()n:nat ==
+ 	return card pendentFriendRequests
+ 	pre true
+ 	post n= card pendentFriendRequests;
 	
 	
 end User
