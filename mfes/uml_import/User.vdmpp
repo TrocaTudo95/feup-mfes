@@ -97,6 +97,11 @@ operations
  	return card pendentFriendRequests
  	pre true
  	post n= card pendentFriendRequests;
+ 	
+ 	public hasPost(p: Post)b:bool ==
+ 	return p in set posts
+ 	pre true
+ 	post b= p in set posts;
 	
 
 

@@ -33,5 +33,10 @@ instance variables
  	
  	pure public getNumberLikes() n:nat ==
  	return card likes;
+ 	
+ 	public hasComment(c: Comment) b: bool ==
+ 	return c in set comments
+ 	pre true
+ 	post b= c in set comments;
 	
 end Post

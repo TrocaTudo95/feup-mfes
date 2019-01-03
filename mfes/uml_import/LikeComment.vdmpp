@@ -1,5 +1,0 @@
-class LikeComment
-instance variables
-  date:seq of (char);
-
-end LikeComment

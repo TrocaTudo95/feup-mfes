@@ -6,32 +6,32 @@ class UserTest
 		 u : User := new User("Sofia",mk_User`Date(1,1,2019),"sofia@gmail.com");
 		 p : Post := new Post("Olá!");
 		 u2 : User := new User("Joao",mk_User`Date(1,1,2019),"joao@gmail.com");
-		 c : Comment := new Comment("I am a content of a comment", u);
 		 
 	 operations
 		 private assertTrue: bool ==> ()
 		 assertTrue(cond) == return
 		 pre cond;
 		
-		
+		 --Função que verifica os parametros do utilizador
 		 private verifyUser()==(
+		  IO`print("\nTest User");
 			assertTrue(u.getName() = "Sofia");
 			assertTrue(u.getBirthday() = mk_User`Date(1,1,2019));
 			assertTrue(u.getEmail() = "sofia@gmail.com");
 			);
+			
 		--Função para testar adicionar post
 		 private addPost()==(
+		  IO`print("\nTest Add Post");
+		  assertTrue(u.hasPost(p) = false);
 		 	u.addPost(p);
-		 	/*assertTrue(u.hasPost(p));*/
-		 );
-		  private addComment()==(
-		 	p.addComment(c);
+		 	assertTrue(u.hasPost(p) = true);
 		 );
 		 
 		 -- Função para testar mandar pedido de amizade a um utilizador
 		 private sendFriendRequest()==
 		 (
-		 IO`print("\nSend Friend Request test\n");
+		 IO`print("\nSend Friend Request test");
 		 assertTrue(u.getNumberOfPendentRequests() = 0);
 		 u2.sendFriendRequest(u);
  		 assertTrue(u.getNumberOfPendentRequests() = 1);
@@ -76,11 +76,9 @@ class UserTest
 		 (
 		  new UserTest().verifyUser();
 		  new UserTest().addPost();
-		  new UserTest().addComment();
 		 	new UserTest().sendFriendRequest();
 		 	new UserTest().acceptFriendRequest();
 		  new UserTest().removeFriend();
 		  new UserTest().rejectFriendRequest();
-	
 		 );
 end UserTest
