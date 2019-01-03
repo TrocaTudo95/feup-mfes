@@ -5,22 +5,31 @@ class Test
 	 instance variables
 		 u : User := new User("Sofia",mk_User`Date(1,1,2019),"sofia@gmail.com");
 		 p : Post := new Post("Olá!");
+		 c : Comment := new Comment("I am a content of a comment", u);
 		 
 	 operations
 		 private assertTrue: bool ==> ()
 		 assertTrue(cond) == return
 		 pre cond;
-		
-		 private addPost()==
-		 (
+		 
+		 private verifyUser()==(
 			assertTrue(u.getName() = "Sofia");
 			assertTrue(u.getBirthday() = mk_User`Date(1,1,2019));
 			assertTrue(u.getEmail() = "sofia@gmail.com");
+			);
+		
+		 private addPost()==(
 		 	u.addPost(p);
+		 	/*assertTrue(u.hasPost(p));*/
 		 );
 		 
-		 public static main() ==
-		 (new Test().addPost();
-	
+		 private addComment()==(
+		 	p.addComment(c);
+		 );
+		 
+		 public static main() ==(
+	 		 new Test().verifyUser();
+			 new Test().addPost();
+			 new Test().addComment();
 		 );
 end Test

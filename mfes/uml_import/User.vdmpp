@@ -1,14 +1,13 @@
 class User
 types 
 	public String = seq1 of char; /* to not allow null sequences*/
-			public Date :: day:nat
-									 month:nat
-									 year:nat;
+	public Date :: day:nat
+							 month:nat
+							 year:nat;
 	
 	
 instance variables	
-  comments:set of (Comment) := {};
-  posts:set of (Post) := {};
+  posts:set of Post := {};
   friends: set of(User) := {};
   starFriends : set of(User) := {};
   family : set of(User) := {};
@@ -24,8 +23,8 @@ operations
 		birthday := b;
 		email := e;
 		return self) 
-		pre len n >0
-	post comments = {} and posts = {} and friends ={} and name = name; 
+	pre len n >0
+	post posts = {} and friends ={} and name = name; 
 	
 	public getName() n : String ==
 	return name
@@ -41,11 +40,11 @@ operations
 	return email
 	pre true
 	post e=email;
-	
+
 	public addPost(p:Post) ==
   posts := {p} union posts
  	post posts = {p} union posts~;
- 	
+	
  	public addFriend(f:User) ==
  	friends := {f} union friends
  	pre card friends < 500
@@ -54,6 +53,8 @@ operations
  	public removeFriend(f:User) ==
  	friends := friends \{f}
  	post friends =friends~ \{f};
-	
+
+functions
+
 	
 end User
