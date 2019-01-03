@@ -17,12 +17,14 @@ instance variables
   birthday:Date;
   email:String;
   name:String;
+  password: String;
   
 operations
- 	public User(n: String, b: Date, e: String) u: User ==
+ 	public User(n: String, b: Date, e: String, p:String) u: User ==
 	(	name := n; 
 		birthday := b;
 		email := e;
+		password := p;
 		return self) 
 		pre len n >0
 	post posts = {} and friends ={} and name = name and pendentFriendRequests={}; 
@@ -102,6 +104,16 @@ operations
  	return p in set posts
  	pre true
  	post b= p in set posts;
+ 	
+ 	public hasFriend(u: User)b:bool ==
+ 	return u in set friends
+ 	pre true
+ 	post b= u in set friends;
+ 	
+ 		public hasFriendRequest(u: User)b:bool ==
+ 	return u in set pendentFriendRequests
+ 	pre true
+ 	post b= u in set pendentFriendRequests;
 	
 
 

@@ -3,10 +3,10 @@ types
 public String = seq of char;values
 -- TODO Define values here
 instance variables
-		 u : User := new User("Sofia",mk_User`Date(1,1,2019),"sofia@gmail.com");
+		 u : User := new User("Sofia",mk_User`Date(1,1,2019),"sofia@gmail.com","123");
 		 p : Post := new Post("Olá!");
 		 c : Comment := new Comment("Olá, tudo bem?",u);
-		 u2 : User := new User("Joao",mk_User`Date(1,1,2019),"joao@gmail.com");
+		 u2 : User := new User("Joao",mk_User`Date(1,1,2019),"joao@gmail.com","123");
 operations
 
  	private assertTrue: bool ==> ()

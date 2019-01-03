@@ -3,9 +3,9 @@ class UserTest
 		public String = seq of char;
 
 	 instance variables
-		 u : User := new User("Sofia",mk_User`Date(1,1,2019),"sofia@gmail.com");
+		 u : User := new User("Sofia",mk_User`Date(1,1,2019),"sofia@gmail.com","123");
 		 p : Post := new Post("Olá!");
-		 u2 : User := new User("Joao",mk_User`Date(1,1,2019),"joao@gmail.com");
+		 u2 : User := new User("Joao",mk_User`Date(1,1,2019),"joao@gmail.com","123");
 		 
 	 operations
 		 private assertTrue: bool ==> ()
@@ -33,21 +33,25 @@ class UserTest
 		 (
 		 IO`print("\nSend Friend Request test");
 		 assertTrue(u.getNumberOfPendentRequests() = 0);
+		 assertTrue(u.hasFriendRequest(u2)=false);
 		 u2.sendFriendRequest(u);
  		 assertTrue(u.getNumberOfPendentRequests() = 1);
+ 		 assertTrue(u.hasFriendRequest(u2)=true);
 		 );
 		 
 		 --Função para testar aceitar pedido de amizade
 		 private acceptFriendRequest() ==
 		 (
+		 assertTrue(u.hasFriendRequest(u2)=false);
 		 u2.sendFriendRequest(u);
-		 assertTrue(u.getNumberOfPendentRequests() = 1);
-		 assertTrue(u.getNumberOfFriends() = 0);
-		 assertTrue(u2.getNumberOfFriends() = 0);
+		 assertTrue(u.hasFriendRequest(u2)=true);
 		 u.acceptRequest(u2);
+		 assertTrue(u.hasFriendRequest(u2)=false);
 		 assertTrue(u.getNumberOfFriends() = 1);
+		 assertTrue(u.hasFriend(u2)=true);
+		 assertTrue(u2.hasFriend(u)=true);
 		 assertTrue(u2.getNumberOfFriends() = 1);
-		  assertTrue(u.getNumberOfPendentRequests() = 0);
+		 assertTrue(u.getNumberOfPendentRequests() = 0);
 		 );
 		 
 		 --Função para testar rejeitar pedido de amizade
@@ -65,11 +69,11 @@ class UserTest
 		 (
 		 u2.sendFriendRequest(u);
 		 u.acceptRequest(u2);
-		 assertTrue(u.getNumberOfFriends() = 1);
-		 assertTrue(u2.getNumberOfFriends() = 1);
+		 assertTrue(u.hasFriend(u2)=true);
+		 assertTrue(u2.hasFriend(u)=true);
 		 u.unfriend(u2);
-		 assertTrue(u.getNumberOfFriends() = 0);
-		 assertTrue(u2.getNumberOfFriends() = 0);
+		 assertTrue(u.hasFriend(u2)=false);
+		 assertTrue(u2.hasFriend(u)=false);
 		 );
 		 
 		 public static main() ==
