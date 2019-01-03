@@ -1,7 +1,7 @@
 # MFES-FEUP
 
 - [ ] Comentário (Sofia)
-- [ ] Like
+- [ ] Like(zé)
 - [ ] ditar informação do perfil
 - [ ] Editar Post
 - [ ] Editar Comentário
@@ -10,3 +10,5 @@
 - [ ] Remover Post
 - [ ] Permissoes de amigos 
 - [ ] Ações diferentes dependendo das permissoes
+- [x] Adicionar/remover amigos
+
