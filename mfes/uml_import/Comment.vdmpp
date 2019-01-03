@@ -1,5 +1,15 @@
 class Comment
+types 
+	public String = seq1 of char;
+	
 instance variables
   content:seq of (char);
+  user: User;
+  
+operations
+  public Comment(c: String, u: User) comment: Comment ==
+	(	content :=c;
+		user := u;
+		return self);
 
 end Comment

@@ -11,8 +11,8 @@ instance variables
 	(	content := c; return self)
 	post p= self;
 	
-	public addComment(c:Comment) ==
-  comments := {c} union comments
+	public addComment(c: Comment) ==
+	comments := {c} union comments
  	post comments = {c} union comments~;
 
 end Post
