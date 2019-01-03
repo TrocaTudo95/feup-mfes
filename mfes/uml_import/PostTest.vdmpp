@@ -6,20 +6,22 @@ instance variables
 		 u : User := new User("Sofia",mk_User`Date(1,1,2019),"sofia@gmail.com");
 		 p : Post := new Post("Olá!");
 		 c : Comment := new Comment("Olá, tudo bem?",u);
-		 u2 : User := new User("Joao",mk_User`Date(1,1,2019),"joao@gmail.com");
+		 r : String := "love";
 operations
 
  	private assertTrue: bool ==> ()
 		 assertTrue(cond) == return
 		 pre cond;
 		 
--- função para testar a funcionalidade de dar like e dislike a um post
-	private like_and_dislike() ==(
-		assertTrue(p.getNumberLikes()=0);
-		assertTrue(p.like(u)=1);
-		assertTrue(p.like(u2)=2);
-		assertTrue(p.dislike(u)=1);
-		assertTrue(p.dislike(u2)=0);		
+-- testa like e dislike num post
+	private like() ==(
+		IO`print("\nTest Like and Dislike");
+		assertTrue(p.hasLike(u,r) = {|->});
+		p.like(u,r);
+		assertTrue(p.hasLike(u,r) = {u|->r});
+		p.dislike(u);
+		assertTrue(p.hasLike(u,r) = {|->});
+		
 	);
 	
 	-- testa adicionar um comentário
@@ -31,7 +33,7 @@ operations
 	);
 	 
  public static main() ==(
- 	new PostTest().like_and_dislike();
+ 	new PostTest().like();
  	new PostTest().add_comment();
 	);
 
