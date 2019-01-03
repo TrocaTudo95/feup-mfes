@@ -4,6 +4,7 @@ types
 	
 instance variables
   comments:set of (Comment) := {};
+  likes:set of (User) := {};
   content:String;
   
   operations
@@ -14,5 +15,23 @@ instance variables
 	public addComment(c: Comment) ==
 	comments := {c} union comments
  	post comments = {c} union comments~;
+ 	
+ 	public like (u:User) n: nat ==
+ 	(likes := {u} union likes;
+ 	return card likes;
+ 	)
+ 	pre true
+ 	post likes = {u} union likes~ and n= card likes;
 
+
+ 	public dislike (u:User) n: nat ==
+ 	(likes := likes \ {u};
+ 	return card likes;
+ 	)
+ 	pre true
+ 	post likes = likes~ \ {u} and n= card likes;
+ 	
+ 	pure public getNumberLikes() n:nat ==
+ 	return card likes;
+	
 end Post

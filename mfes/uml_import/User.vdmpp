@@ -55,6 +55,13 @@ operations
  	pre card friends < 500
  	post friends = {f} union friends~ and pendentFriendRequests =pendentFriendRequests~ \{f};
  	
+ 	public rejectRequest(f:User) ==
+ 	(
+ 	pendentFriendRequests := pendentFriendRequests \{f}
+ 	)
+ 	pre f in set pendentFriendRequests
+ 	post f not in set pendentFriendRequests; 
+ 	
  	public sendFriendRequest(f:User) ==
  	f.addFriendRequest(self)
  	pre true
@@ -75,7 +82,7 @@ operations
  	(removeFriend(f);
  	f.removeFriend(self);
  	)
- 	post friends =friends~ \{f};
+ 	post f not in set friends;
  	
  	public removeFriend(f:User) ==
  	friends := friends \{f}

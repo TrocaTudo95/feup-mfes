@@ -1,5 +1,0 @@
-class Like
-instance variables
-  date:seq of (char);
-
-end Like

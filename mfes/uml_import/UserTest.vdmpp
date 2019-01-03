@@ -1,0 +1,86 @@
+class UserTest
+	types 
+		public String = seq of char;
+
+	 instance variables
+		 u : User := new User("Sofia",mk_User`Date(1,1,2019),"sofia@gmail.com");
+		 p : Post := new Post("Olá!");
+		 u2 : User := new User("Joao",mk_User`Date(1,1,2019),"joao@gmail.com");
+		 c : Comment := new Comment("I am a content of a comment", u);
+		 
+	 operations
+		 private assertTrue: bool ==> ()
+		 assertTrue(cond) == return
+		 pre cond;
+		
+		
+		 private verifyUser()==(
+			assertTrue(u.getName() = "Sofia");
+			assertTrue(u.getBirthday() = mk_User`Date(1,1,2019));
+			assertTrue(u.getEmail() = "sofia@gmail.com");
+			);
+		--Função para testar adicionar post
+		 private addPost()==(
+		 	u.addPost(p);
+		 	/*assertTrue(u.hasPost(p));*/
+		 );
+		  private addComment()==(
+		 	p.addComment(c);
+		 );
+		 
+		 -- Função para testar mandar pedido de amizade a um utilizador
+		 private sendFriendRequest()==
+		 (
+		 IO`print("\nSend Friend Request test\n");
+		 assertTrue(u.getNumberOfPendentRequests() = 0);
+		 u2.sendFriendRequest(u);
+ 		 assertTrue(u.getNumberOfPendentRequests() = 1);
+		 );
+		 
+		 --Função para testar aceitar pedido de amizade
+		 private acceptFriendRequest() ==
+		 (
+		 u2.sendFriendRequest(u);
+		 assertTrue(u.getNumberOfPendentRequests() = 1);
+		 assertTrue(u.getNumberOfFriends() = 0);
+		 assertTrue(u2.getNumberOfFriends() = 0);
+		 u.acceptRequest(u2);
+		 assertTrue(u.getNumberOfFriends() = 1);
+		 assertTrue(u2.getNumberOfFriends() = 1);
+		  assertTrue(u.getNumberOfPendentRequests() = 0);
+		 );
+		 
+		 --Função para testar rejeitar pedido de amizade
+		 private rejectFriendRequest()==
+		 (
+		 u2.sendFriendRequest(u);
+		 assertTrue(u.getNumberOfPendentRequests() = 1);
+		 assertTrue(u2.getNumberOfFriends() = 0);
+		 u.rejectRequest(u2);
+		 assertTrue(u.getNumberOfPendentRequests() = 0);
+		 assertTrue(u2.getNumberOfFriends() = 0);
+		 );
+		 --Função para testar remover amigo da lista de amigos
+		 private removeFriend() ==
+		 (
+		 u2.sendFriendRequest(u);
+		 u.acceptRequest(u2);
+		 assertTrue(u.getNumberOfFriends() = 1);
+		 assertTrue(u2.getNumberOfFriends() = 1);
+		 u.unfriend(u2);
+		 assertTrue(u.getNumberOfFriends() = 0);
+		 assertTrue(u2.getNumberOfFriends() = 0);
+		 );
+		 
+		 public static main() ==
+		 (
+		  new UserTest().verifyUser();
+		  new UserTest().addPost();
+		  new UserTest().addComment();
+		 	new UserTest().sendFriendRequest();
+		 	new UserTest().acceptFriendRequest();
+		  new UserTest().removeFriend();
+		  new UserTest().rejectFriendRequest();
+	
+		 );
+end UserTest
