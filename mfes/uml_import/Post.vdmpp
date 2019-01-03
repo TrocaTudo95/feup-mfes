@@ -1,10 +1,15 @@
 class Post
+values
+  public Reactions : set of String = {"sad","love","like","angry", "surprise","funny"};
+  
 types 
 	public String = seq of char;
+	public Reaction = String
+		inv r == r in set Reactions;
 	
 instance variables
   comments:set of (Comment) := {};
-  likes:set of (User) := {};
+  likes: map User to Reaction := { |->};
   content:String;
   
   operations
@@ -16,23 +21,21 @@ instance variables
 	comments := {c} union comments
  	post comments = {c} union comments~;
  	
- 	public like (u:User) n: nat ==
- 	(likes := {u} union likes;
- 	return card likes;
- 	)
+ 	public like (u:User, r: String) ==
+ 	likes := {u|->r} ++ likes
  	pre true
- 	post likes = {u} union likes~ and n= card likes;
+ 	post likes = {u|->r} ++ likes~;
 
 
- 	public dislike (u:User) n: nat ==
- 	(likes := likes \ {u};
- 	return card likes;
- 	)
+ 	public dislike (u:User) ==
+ 	likes := {u} <-: likes
  	pre true
- 	post likes = likes~ \ {u} and n= card likes;
+ 	post likes = {u} <-: likes;
  	
- 	pure public getNumberLikes() n:nat ==
- 	return card likes;
+ 	public hasLike(u:User, r: String) l: map User to String  ==
+ 	return {u} <: likes
+ 	pre true
+ 	post l = {u} <: likes;
  	
  	public hasComment(c: Comment) b: bool ==
  	return c in set comments
