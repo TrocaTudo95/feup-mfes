@@ -32,6 +32,16 @@ class UserTest
 		 	assertTrue(u.hasPost(u.addPost(c,p)) = true);
 		 );
 		 
+		 --função para testar remover post de um dado user
+		 private removePost: ()==>()
+		 removePost()==(
+		 dcl p: Post :=u.addPost(c,p);
+		 assertTrue(u.hasPost(p)=true);
+		 u.removePost(p);
+		 assertTrue(u.hasPost(p)=false);
+		 );
+		 
+		 
 		 -- Função para testar mandar pedido de amizade a um utilizador
 		 private sendFriendRequest: ()==>()
 		 sendFriendRequest()==
@@ -91,6 +101,7 @@ class UserTest
 		 (
 		  new UserTest().verifyUser();
 		  new UserTest().addPost();
+		  new UserTest().removePost();
 		 	new UserTest().sendFriendRequest();
 		 	new UserTest().acceptFriendRequest();
 		  new UserTest().removeFriend();
