@@ -51,6 +51,11 @@ public getPassword() p : String ==
 	pre true
 	post p=password;
 	
+	public getFriends() u : set of User ==
+	return friends
+	pre true
+	post u=friends;
+	
 	
 	public addPost(p:Post) ==
   posts := {p} union posts

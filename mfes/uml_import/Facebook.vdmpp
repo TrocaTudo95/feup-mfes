@@ -1,0 +1,69 @@
+class Facebook
+types 
+	public String = seq1 of char; /* to not allow null sequences*/
+	public Date :: day:nat
+							 month:nat
+							 year:nat;
+values
+
+instance variables
+users: set of(User) := {};
+currentUser : User;
+
+
+operations
+
+public register(n: User`String, b: User`Date, e: User`String, p:User`String) us:User == (
+currentUser := new User(n,b,e,p);
+users := {currentUser} union users;
+return currentUser;
+)
+post users = {currentUser} union users~ and us=currentUser;
+
+
+public login(e: User`String,p:User`String) us:User==
+(
+ for all u in set users do
+ (
+ if u.getEmail()= e 
+ then if u.getPassword() =p
+ then (IO`print("\n Login Success");
+ currentUser:=u; return currentUser;)
+ );
+ return currentUser;
+)
+post us=currentUser;
+
+	public logout() ==
+	currentUser := new User();
+
+	public hasUser(u: User)b:bool ==
+ 	return u in set users
+ 	pre true
+ 	post b= u in set users;
+ 	
+ 	public getCurrentUser() u:User == 
+ 	return currentUser
+ 	post u=currentUser;
+ 	
+ 	public recommendUsers() us: set of User ==
+ 	(
+ 	dcl recommendations: set of User;
+ 	dcl friends: set of User := currentUser.getFriends();
+ 	for all u in set friends do(
+ 	dcl friendsOfFriends: set of User := u.getFriends();
+ 	for all f in set friendsOfFriends do(
+ 	if f not in set friends 
+ 	then recommendations := {f} union recommendations;
+ 	)
+ 	);
+ 	return recommendations;
+ 	)
+ 	pre card users >0;
+ 	
+
+functions 
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Facebook
