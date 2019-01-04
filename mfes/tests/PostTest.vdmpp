@@ -48,6 +48,10 @@ operations
 		u.addToFamily(u2);
 		assertTrue(fp.addComment(cc,u2));
 		
+		IO`print("\nTest Remove Comment");
+		assertTrue(pp.getCommentsNumber() =1);
+		pp.removeComment(iota c in set pp.getComments() & c.getUser()=u2);
+		assertTrue(pp.getCommentsNumber() =0);
 	);
 	
 	private editPost: ()==>()

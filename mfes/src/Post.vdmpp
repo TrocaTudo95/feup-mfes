@@ -22,6 +22,11 @@ operations
  		Post(c,p,o) ==(	
  		content := c; permission:=p; owner:=o; return self)
 		post RESULT= self and content = c and permission = p;
+		
+	public pure getComments : () ==> set of Comment
+		getComments() ==
+		return comments
+		post RESULT = comments;
 	
 	public addComment: String*User ==> bool
 		addComment(c,u) == (
@@ -29,7 +34,13 @@ operations
 		if isAvailable(u)
 		then (comments := {comment} union comments; return true)
 		else return false);
- 	
+		
+	public removeComment: Comment ==> ()
+		removeComment(c) ==(
+		if(c in set comments)
+		then comments := comments \ {c})
+		pre c in set comments;
+		
  	public like : User*Reaction==>()
  		like(u,r) ==
 	 	likes := {u|->r} ++ likes
@@ -55,24 +66,28 @@ operations
 	post content <> content~;
 
 	pure public getCommentFromUser: User ==> Comment
-	getCommentFromUser(u) == (
-	dcl comment:Comment:=iota c in set comments & u=c.getUser();
-	return comment;
-	);
+		getCommentFromUser(u) == (
+		dcl comment:Comment:=iota c in set comments & u=c.getUser();
+		return comment;
+		);
+	
 	pure public getContent: () ==> String
-	getContent() == (
-	return content;
-	);
+		getContent() == (
+		return content;
+		);
 
   public isAvailable: User ==> bool
- 	isAvailable(u) ==(
- 	if not owner.hasFriend(u)
-	then return false;
-	if permission = "public"
-	then return true
-	elseif owner.getPermission(u) = "family"
-	then return true
-	else return false;);
+	 	isAvailable(u) ==(
+	 	if not owner.hasFriend(u)
+		then return false;
+		if permission = "public"
+		then return true
+		elseif owner.getPermission(u) = "family"
+		then return true
+		else return false;);
 
+	pure public getCommentsNumber :  () ==> nat
+		getCommentsNumber() ==
+		return card comments;
 	
 end Post
