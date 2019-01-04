@@ -48,6 +48,23 @@ instance variables
  	pre true
  	post b= c in set comments;
  	
+
+ 	public editPost: String ==>()
+	editPost(c) ==(
+	content := c;
+	)
+	post content <> content~;
+
+	pure public getCommentFromUser: User ==> Comment
+	getCommentFromUser(u) == (
+	dcl comment:Comment:=iota c in set comments & u=c.getUser();
+	return comment;
+	);
+	pure public getContent: () ==> String
+	getContent() == (
+	return content;
+	);
+
   public isAvailable: User ==> bool
  	isAvailable(u) ==(
  	if not owner.hasFriend(u)
@@ -57,5 +74,6 @@ instance variables
 	elseif owner.getPermission(u) = "family"
 	then return true
 	else return false;);
+
 	
 end Post

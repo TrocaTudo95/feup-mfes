@@ -79,7 +79,7 @@ class UserTest
 		 assertTrue(u2.hasFriend(u)=false);
 		 );
 		 
-		 public static main() ==
+		 public static run() ==
 		 (
 		  new UserTest().verifyUser();
 		  new UserTest().addPost();

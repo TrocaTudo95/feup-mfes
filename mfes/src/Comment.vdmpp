@@ -11,5 +11,23 @@ operations
   Comment(c,u)	==(	content :=c;
 		user := u;
 		return self);
+		
+	public editComment: String ==>()
+	editComment(c) ==(
+	content := c;
+	)
+	post content <> content~;
+	
+	pure public getUser: () ==> User
+	getUser() ==(
+	return user;
+	);
+	
+	pure public getContent: () ==> String
+	getContent() ==(
+	return content;
+	);
+	
+		
 
 end Comment

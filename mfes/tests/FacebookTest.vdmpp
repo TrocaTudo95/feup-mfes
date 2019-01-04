@@ -77,7 +77,7 @@ operations
 			
 		 );
 		 
-		 public static main() ==
+		 public static run() ==
 		 (
 		  new FacebookTest().createUser();
 		  new FacebookTest().logout();
