@@ -75,6 +75,12 @@ operations
 	  posts := {pst} union posts;
 	  return pst)
 	 	post posts = {RESULT} union posts~;
+	 	
+	public removePost : Post ==> ()
+		removePost(p) ==(
+		posts := posts \ {p};
+		)
+		post posts = posts~ \ {p};
  	
  	public acceptRequest : User ==> ()
  		acceptRequest(f) ==(
