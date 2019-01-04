@@ -16,18 +16,21 @@ operations
  private assertTrue: bool ==> ()
 		 assertTrue(cond) == return
 		 pre cond;
+		 
  --função para testar registar e login no facebook
-		 private createUser() ==(
+		 private createUser: ()==>()
+		 createUser() ==(
 		 IO`print("\nRegister Test");
 		 u2:=face.register("Sofia",mk_User`Date(1,1,2019),"sofia@gmail.com","123");
-		 u:=face.login("sofi@gmail.com","123");
+		 u:=face.login("sofia@gmail.com","123");
 		 assertTrue(u=u2);
 		 assertTrue(face.getCurrentUser()=u);
 		 assertTrue(face.hasUser(u2)=true);
 		 );
 		 
 		 --função para testar o logout
-		 private logout() ==( 
+		 private logout: ()==>()
+		 logout() ==( 
 		  IO`print("\nLogout Test");
 		  u2:=face.register("Sofia",mk_User`Date(1,1,2019),"sofia@gmail.com","123");
 		  assertTrue(face.hasUser(u2)=true);
@@ -38,7 +41,8 @@ operations
 		 
 		 );
 		 
-		 private friends_recommendations() ==
+		 private friends_recommendations: ()==>()
+		 friends_recommendations() ==
 		 (
 		  IO`print("\nFriend recommendations test");
 		  u2:=face.register("Sofia",mk_User`Date(1,1,2019),"sofia@gmail.com","123");
@@ -57,7 +61,8 @@ operations
 		 
 		 );
 		 
-		 private feed() ==(
+		 private feed: ()==>()
+		 feed() ==(
 		  dcl p1:Post := u2.addPost("I am a public post","public");
 		  dcl p2:Post := u2.addPost("I am a family only post","family");
 		  
@@ -77,7 +82,8 @@ operations
 			
 		 );
 		 
-		 public static run() ==
+		 public static run: ()==>()
+		 run() ==
 		 (
 		  new FacebookTest().createUser();
 		  new FacebookTest().logout();

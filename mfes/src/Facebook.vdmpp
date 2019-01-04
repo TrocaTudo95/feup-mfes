@@ -29,7 +29,8 @@ public login(e: User`String,p:User`String) us:User==
  if u.getEmail()= e 
  then if u.getPassword() =p
  then (IO`print("\n Login Success");
- currentUser:=u; return currentUser;)
+ currentUser:=u;
+  return currentUser;)
  );
  return currentUser;
 )

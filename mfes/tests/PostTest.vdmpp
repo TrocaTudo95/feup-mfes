@@ -19,7 +19,8 @@ operations
 		 pre cond;
 		 
 -- testa like e dislike num post
-	private like() ==(
+	private like: ()==>()
+	like() ==(
 		IO`print("\nTest Like and Dislike");
 		assertTrue(pp.hasLike(u,r) = {|->});
 		pp.like(u,r);
@@ -30,7 +31,8 @@ operations
 	);
 	
 	-- testa adicionar um comentário
-	private add_comment() ==(
+	private add_comment: ()==>()
+	add_comment() ==(
 	  IO`print("\nTest Add Stranger Comment");
 		assertTrue(pp.addComment(cc,u2) =false);
 	  
@@ -48,13 +50,15 @@ operations
 		
 	);
 	
-	private editPost() ==(
+	private editPost: ()==>()
+	editPost() ==(
 	assertTrue(pp.getContent()="I am a public post!");
 	pp.editPost("hello");
 	assertTrue(pp.getContent()="hello");
 	);
 	
-	private editComment() ==(
+	private editComment: ()==>()
+	editComment() ==(
 	u2.sendFriendRequest(u);
 	u.acceptRequest(u2);
 	assertTrue(pp.addComment("hi",u2)=true);
@@ -63,7 +67,8 @@ operations
 	assertTrue(pp.getCommentFromUser(u2).getContent()="bye");
 	);
 	 
- public static run() ==(
+ public static run: ()==>()
+ 	run() ==(
  	new PostTest().like();
  	new PostTest().add_comment();
  	new PostTest().editPost();
