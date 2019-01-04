@@ -7,8 +7,9 @@ types
 values
 
 instance variables
-users: set of(User) := {};
+users: set of User := {};
 currentUser : User;
+feed: set of Post := {};
 
 
 operations
@@ -59,13 +60,22 @@ post us=currentUser;
  	);
  	return recommendations;
  	)
- 	pre card users >0;
+ 	pre card users >0 and card currentUser.getFriends()>0;
  	
  	
  	public hasFriend(u: User, us: set of User)b:bool ==
  	return u in set us
  	pre true
  	post b= u in set us;
+ 	
+ 	public getFeed() posts: set of Post ==(
+ 	 	dcl friends: set of User := currentUser.getFriends();
+ 		for all u in set friends do(
+			 	dcl posts: set of Post := u.getPosts();
+			 	feed := posts union feed;
+ 		);
+ 		return feed;
+ 		);
 
 functions 
 -- TODO Define functiones here

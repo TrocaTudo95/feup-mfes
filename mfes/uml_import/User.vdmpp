@@ -46,15 +46,21 @@ operations
 	post e=email;
 
 
-public getPassword() p : String ==
+	pure public getPassword() p : String ==
 	return password
 	pre true
 	post p=password;
 	
-	public getFriends() u : set of User ==
+	pure public getFriends() u : set of User ==
 	return friends
 	pre true
 	post u=friends;
+	
+	pure public getPosts() p: set of Post ==
+	return posts
+	pre true
+	post p= posts;
+	
 	
 	
 	public addPost(p:Post) ==
