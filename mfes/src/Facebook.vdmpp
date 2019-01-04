@@ -14,8 +14,8 @@ feed: set of Post := {};
 
 operations
 
-public register(n: User`String, b: User`Date, e: User`String, p:User`String) us:User == (
-currentUser := new User(n,b,e,p);
+public register : User`String*User`Date*User`String*User`String ==> ()
+register(n,b,e,p) ==(currentUser := new User(n,b,e,p);
 users := {currentUser} union users;
 return currentUser;
 )

@@ -7,8 +7,8 @@ instance variables
   user: User;
   
 operations
-  public Comment(c: String, u: User) comment: Comment ==
-	(	content :=c;
+  public Comment: String*User ==> Comment 
+  Comment(c,u)	==(	content :=c;
 		user := u;
 		return self);
 
