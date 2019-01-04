@@ -6,6 +6,9 @@ class UserTest
 		 u : User := new User("Sofia",mk_User`Date(1,1,2019),"sofia@gmail.com","123");
 		 p : Post := new Post("Olá!");
 		 u2 : User := new User("Joao",mk_User`Date(1,1,2019),"joao@gmail.com","123");
+		 u3 : User := new User("rita",mk_User`Date(1,1,2019),"jose@gmail.com","123");
+		 u4 : User := new User("mario",mk_User`Date(1,1,2019),"jose@gmail.com","123");
+		 u5 : User := new User("teresa",mk_User`Date(1,1,2019),"jose@gmail.com","123");
 		 face: Facebook := new Facebook();
 		 
 	 operations
@@ -100,11 +103,24 @@ class UserTest
 		 
 		 );
 		 
---		 private friends_recommendations() ==
---		 (
---		  u2:=face.register("Sofia",mk_User`Date(1,1,2019),"sofia@gmail.com","123");
---		 	u2.se
---		 );
+		 private friends_recommendations() ==
+		 (
+		  IO`print("\nFriend recommendations test");
+		  u2:=face.register("Sofia",mk_User`Date(1,1,2019),"sofia@gmail.com","123");
+		 	u2.sendFriendRequest(u);
+		 	u2.sendFriendRequest(u3);
+		 	u.acceptRequest(u2);
+		 	u3.acceptRequest(u2);
+		 	u3.sendFriendRequest(u4);
+		 	u4.acceptRequest(u3);
+		 	u.sendFriendRequest(u5);
+		 	u5.acceptRequest(u);
+		 	assertTrue(face.hasFriend(u5,face.recommendUsers())=true);
+		 	assertTrue(face.hasFriend(u4,face.recommendUsers())=true);
+		 	assertTrue(face.hasFriend(u,face.recommendUsers())=false);
+		 	assertTrue(face.hasFriend(u3,face.recommendUsers())=false);
+		 
+		 );
 		 
 		 public static main() ==
 		 (
@@ -116,5 +132,6 @@ class UserTest
 		  new UserTest().rejectFriendRequest();
 		  new UserTest().createUser();
 		  new UserTest().logout();
+		  new UserTest().friends_recommendations();
 		 );
 end UserTest
