@@ -24,14 +24,9 @@ instance variables
 	
 	public addComment(c: String,u:User) b: bool == (
 	dcl comment : Comment := new Comment(c,u);
-	if not owner.hasFriend(u)
-	then return false;
-	if permission = "public"
-	then comments := {comment} union comments
-	elseif owner.getPermission(u) = "family"
-	then comments := {comment} union comments
-	else return false;
-	return true);
+	if isAvailable(u)
+	then (comments := {comment} union comments; return true)
+	else return false);
  	
  	public like (u:User, r: Reaction) ==
  	likes := {u|->r} ++ likes
@@ -53,6 +48,7 @@ instance variables
  	pre true
  	post b= c in set comments;
  	
+
  	public editPost: String ==>()
 	editPost(c) ==(
 	content := c;
@@ -68,5 +64,16 @@ instance variables
 	getContent() == (
 	return content;
 	);
+
+  public isAvailable: User ==> bool
+ 	isAvailable(u) ==(
+ 	if not owner.hasFriend(u)
+	then return false;
+	if permission = "public"
+	then return true
+	elseif owner.getPermission(u) = "family"
+	then return true
+	else return false;);
+
 	
 end Post

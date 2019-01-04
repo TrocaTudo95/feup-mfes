@@ -71,11 +71,12 @@ post us=currentUser;
  	public getFeed() posts: set of Post ==(
  	 	dcl friends: set of User := currentUser.getFriends();
  		for all u in set friends do(
-			 	dcl posts: set of Post := u.getPosts();
+			 	dcl posts: set of Post := u.getPosts(currentUser);
 			 	feed := posts union feed;
  		);
  		return feed;
- 		);
+ 		)
+ 	pre currentUser <> undefined;
 
 functions 
 -- TODO Define functiones here

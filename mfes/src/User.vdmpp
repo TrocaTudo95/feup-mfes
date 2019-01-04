@@ -59,7 +59,14 @@ operations
 	pre true
 	post p= posts;
 	
-	
+	public getPosts(u: User) pst: set of Post ==(
+	dcl res : set of Post :={};
+	for all p in set posts do(
+		if p.isAvailable(u)
+		then res := {p} union res;
+	);
+	return res;
+	);
 	
 	public addPost(c:String, p: Post`Permission) res: Post==( 
 	dcl pst: Post := new Post(c,p,self);

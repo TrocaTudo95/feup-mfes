@@ -9,6 +9,7 @@ class FacebookTest
 		 u4 : User := new User("mario",mk_User`Date(1,1,2019),"jose@gmail.com","123");
 		 u5 : User := new User("teresa",mk_User`Date(1,1,2019),"jose@gmail.com","123");
 		 face: Facebook := new Facebook();
+		 
 
 operations
 
@@ -16,8 +17,8 @@ operations
 		 assertTrue(cond) == return
 		 pre cond;
  --função para testar registar e login no facebook
-		 private createUser() ==
-		 (
+		 private createUser() ==(
+		 IO`print("\nRegister Test");
 		 u2:=face.register("Sofia",mk_User`Date(1,1,2019),"sofia@gmail.com","123");
 		 u:=face.login("sofi@gmail.com","123");
 		 assertTrue(u=u2);
@@ -26,8 +27,8 @@ operations
 		 );
 		 
 		 --função para testar o logout
-		 private logout() ==
-		 (
+		 private logout() ==( 
+		  IO`print("\nLogout Test");
 		  u2:=face.register("Sofia",mk_User`Date(1,1,2019),"sofia@gmail.com","123");
 		  assertTrue(face.hasUser(u2)=true);
 		  assertTrue(face.getCurrentUser()=u2);
@@ -56,11 +57,32 @@ operations
 		 
 		 );
 		 
+		 private feed() ==(
+		  dcl p1:Post := u2.addPost("I am a public post","public");
+		  dcl p2:Post := u2.addPost("I am a family only post","family");
+		  
+		  IO`print("\nGet Empty Feed Test");
+		  u:=face.register("Sofia",mk_User`Date(1,1,2019),"sofia@gmail.com","123");
+		  u:=face.login("sofi@gmail.com","123");
+		  assertTrue(face.getFeed() = {});
+		  
+		  IO`print("\nGet Friends Feed Test");
+		  u2.sendFriendRequest(u);
+			u.acceptRequest(u2);
+			assertTrue(face.getFeed() = {p1});
+			
+		  IO`print("\nGet Family Feed Test");
+			u2.addToFamily(u);
+			assertTrue(face.getFeed() = {p1,p2});
+			
+		 );
+		 
 		 public static run() ==
 		 (
 		  new FacebookTest().createUser();
 		  new FacebookTest().logout();
 		  new FacebookTest().friends_recommendations();
+		  new FacebookTest().feed();
 		 );
 functions
 -- TODO Define functiones here
