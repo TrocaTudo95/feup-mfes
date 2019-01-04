@@ -48,6 +48,9 @@ operations
 		u.addToFamily(u2);
 		assertTrue(fp.addComment(cc,u2));
 		
+		IO`print("\nTest Add Own Comment");
+		assertTrue(fp.addComment(cc,u));
+		
 		IO`print("\nTest Remove Comment");
 		assertTrue(pp.getCommentsNumber() =1);
 		pp.removeComment(iota c in set pp.getComments() & c.getUser()=u2);

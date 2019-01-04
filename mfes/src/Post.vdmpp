@@ -78,7 +78,7 @@ operations
 
   public isAvailable: User ==> bool
 	 	isAvailable(u) ==(
-	 	if not owner.hasFriend(u)
+	 	if not owner.hasFriend(u) and not owner = u
 		then return false;
 		if permission = "public"
 		then return true
