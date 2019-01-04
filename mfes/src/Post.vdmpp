@@ -1,0 +1,56 @@
+class Post
+values
+  public Reactions : set of String = {"sad","love","like","angry", "surprise","laugh"};
+  public Permissions: set of String = {"public","family"};
+  
+types 
+	public String = seq of char;
+	public Reaction = String
+		inv r == r in set Reactions;
+	public Permission = String
+		inv p == p in set Permissions;
+	
+instance variables
+  owner : User;
+  comments:set of (Comment) := {};
+  permission: Permission;
+  likes: map User to Reaction := { |->};
+  content:String;
+  
+  operations
+ 	public Post(c: String,p:Permission,o:User ) pst: Post ==
+	(	content := c; permission:=p; owner:=o; return self)
+	post pst= self and content = c and permission = p;
+	
+	public addComment(c: String,u:User) b: bool == (
+	dcl comment : Comment := new Comment(c,u);
+	if not owner.hasFriend(u)
+	then return false;
+	if permission = "public"
+	then comments := {comment} union comments
+	elseif owner.getPermission(u) = "family"
+	then comments := {comment} union comments
+	else return false;
+	return true);
+ 	
+ 	public like (u:User, r: Reaction) ==
+ 	likes := {u|->r} ++ likes
+ 	pre true
+ 	post likes = {u|->r} ++ likes~;
+
+ 	public dislike (u:User) ==
+ 	likes := {u} <-: likes
+ 	pre true
+ 	post likes = {u} <-: likes;
+ 	
+ 	public hasLike(u:User, r: Reaction) l: map User to String  ==
+ 	return {u} <: likes
+ 	pre true
+ 	post l = {u} <: likes;
+ 	
+ 	public hasComment(c: Comment) b: bool ==
+ 	return c in set comments
+ 	pre true
+ 	post b= c in set comments;
+	
+end Post

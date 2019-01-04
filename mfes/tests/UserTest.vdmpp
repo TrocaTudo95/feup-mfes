@@ -4,7 +4,8 @@ class UserTest
 
 	 instance variables
 		 u : User := new User("Sofia",mk_User`Date(1,1,2019),"sofia@gmail.com","123");
-		 p : Post := new Post("Olá!");
+		 c : String := "I am a Post";
+		 p : Post`Permission := "public";
 		 u2 : User := new User("Joao",mk_User`Date(1,1,2019),"joao@gmail.com","123");
 		 u3 : User := new User("rita",mk_User`Date(1,1,2019),"jose@gmail.com","123");
 		
@@ -25,9 +26,7 @@ class UserTest
 		--Função para testar adicionar post
 		 private addPost()==(
 		  IO`print("\nTest Add Post");
-		  assertTrue(u.hasPost(p) = false);
-		 	u.addPost(p);
-		 	assertTrue(u.hasPost(p) = true);
+		 	assertTrue(u.hasPost(u.addPost(c,p)) = true);
 		 );
 		 
 		 -- Função para testar mandar pedido de amizade a um utilizador

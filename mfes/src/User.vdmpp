@@ -1,18 +1,16 @@
 class User
+
 types 
 	public String = seq1 of char; /* to not allow null sequences*/
 	public Date :: day:nat
 							 month:nat
 							 year:nat;
 	
-	
 instance variables	
-  posts:set of Post := {};
-  friends: set of(User) := {};
-  pendentFriendRequests: set of(User) := {};
-  starFriends : set of(User) := {};
-  family : set of(User) := {};
-  bloquedUsers : set of(User) := {};
+  posts : set of Post := {};
+  friends : set of(User) := {};
+  pendentFriendRequests : set of(User) := {};
+  family: set of(User) := {};
   
   birthday:Date;
   email:String;
@@ -63,9 +61,11 @@ operations
 	
 	
 	
-	public addPost(p:Post) ==
-  posts := {p} union posts
- 	post posts = {p} union posts~;
+	public addPost(c:String, p: Post`Permission) res: Post==( 
+	dcl pst: Post := new Post(c,p,self);
+  posts := {pst} union posts;
+  return pst)
+ 	post posts = {res} union posts~;
  	
  	public acceptRequest(f:User) ==
  	(friends := {f} union friends;
@@ -128,13 +128,25 @@ operations
  	pre true
  	post b= u in set friends;
  	
- 		public hasFriendRequest(u: User)b:bool ==
+	public hasFriendRequest(u: User)b:bool ==
  	return u in set pendentFriendRequests
  	pre true
  	post b= u in set pendentFriendRequests;
-	
-
-
+ 	
+ 	public addToFamily: User ==> ()
+ 	addToFamily(u) == (
+ 	family := {u} union family)
+ 	post family = {u} union family;
+ 	
+ 	public getPermission: User ==> Post`Permission
+ 	getPermission(u) ==(
+ 	if u = self
+ 	then return "family";
+ 	if u in set family
+ 	then return "family"
+ 	else return "public");
+ 	
+ 	
 functions
 
 

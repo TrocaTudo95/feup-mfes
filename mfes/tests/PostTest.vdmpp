@@ -5,8 +5,9 @@ public String = seq of char;values
 instance variables
 
 		 u : User := new User("Sofia",mk_User`Date(1,1,2019),"sofia@gmail.com","123");
-		 p : Post := new Post("Olá!");
-		 c : Comment := new Comment("Olá, tudo bem?",u);
+		 pp : Post := new Post("I am a public post!", "public",u);
+		 fp : Post := new Post("I am a family post!", "family",u);
+		 cc : String := "I am a comment!";
 		 u2 : User := new User("Joao",mk_User`Date(1,1,2019),"joao@gmail.com","123");
 		 r : String := "love";
 		 
@@ -19,20 +20,31 @@ operations
 -- testa like e dislike num post
 	private like() ==(
 		IO`print("\nTest Like and Dislike");
-		assertTrue(p.hasLike(u,r) = {|->});
-		p.like(u,r);
-		assertTrue(p.hasLike(u,r) = {u|->r});
-		p.dislike(u);
-		assertTrue(p.hasLike(u,r) = {|->});
+		assertTrue(pp.hasLike(u,r) = {|->});
+		pp.like(u,r);
+		assertTrue(pp.hasLike(u,r) = {u|->r});
+		pp.dislike(u);
+		assertTrue(pp.hasLike(u,r) = {|->});
 		
 	);
 	
 	-- testa adicionar um comentário
 	private add_comment() ==(
-	  IO`print("\nTest Add Comment");
-		assertTrue(p.hasComment(c)=false);
-		p.addComment(c);
-		assertTrue(p.hasComment(c) = true);
+	  IO`print("\nTest Add Stranger Comment");
+		assertTrue(pp.addComment(cc,u2) =false);
+	  
+	  IO`print("\nTest Add Friend Comment - Public Post");
+		u2.sendFriendRequest(u);
+		u.acceptRequest(u2);
+		assertTrue(pp.addComment(cc,u2));
+		
+		IO`print("\nTest Add Friend Comment - Family Post");
+		assertTrue(fp.addComment(cc,u2) =false);
+		
+		IO`print("\nTest Add Family Comment - Family Post");
+		u.addToFamily(u2);
+		assertTrue(fp.addComment(cc,u2));
+		
 	);
 	 
  public static main() ==(
