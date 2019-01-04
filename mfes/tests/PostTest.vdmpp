@@ -8,6 +8,7 @@ instance variables
 		 pp : Post := new Post("I am a public post!", "public",u);
 		 fp : Post := new Post("I am a family post!", "family",u);
 		 cc : String := "I am a comment!";
+		 cc2 : String := "hi!";
 		 u2 : User := new User("Joao",mk_User`Date(1,1,2019),"joao@gmail.com","123");
 		 r : String := "love";
 		 
@@ -46,10 +47,27 @@ operations
 		assertTrue(fp.addComment(cc,u2));
 		
 	);
+	
+	private editPost() ==(
+	assertTrue(pp.getContent()="I am a public post!");
+	pp.editPost("hello");
+	assertTrue(pp.getContent()="hello");
+	);
+	
+	private editComment() ==(
+	u2.sendFriendRequest(u);
+	u.acceptRequest(u2);
+	assertTrue(pp.addComment("hi",u2)=true);
+	assertTrue(pp.getCommentFromUser(u2).getContent()="hi");
+	pp.getCommentFromUser(u2).editComment("bye");
+	assertTrue(pp.getCommentFromUser(u2).getContent()="bye");
+	);
 	 
- public static main() ==(
+ public static run() ==(
  	new PostTest().like();
  	new PostTest().add_comment();
+ 	new PostTest().editPost();
+ 	new PostTest().editComment();
 	);
 
 

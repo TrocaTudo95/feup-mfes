@@ -1,0 +1,15 @@
+class Test
+instance variables
+static userTests: UserTest := new UserTest();
+static facebookTests: FacebookTest := new FacebookTest();
+static postTests: PostTest := new PostTest();
+
+
+operations
+	public static main: () ==> ()
+	main() ==(
+	userTests.run();
+	facebookTests.run();
+	postTests.run();
+	)
+end Test

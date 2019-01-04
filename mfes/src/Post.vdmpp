@@ -52,5 +52,21 @@ instance variables
  	return c in set comments
  	pre true
  	post b= c in set comments;
+ 	
+ 	public editPost: String ==>()
+	editPost(c) ==(
+	content := c;
+	)
+	post content <> content~;
+
+	pure public getCommentFromUser: User ==> Comment
+	getCommentFromUser(u) == (
+	dcl comment:Comment:=iota c in set comments & u=c.getUser();
+	return comment;
+	);
+	pure public getContent: () ==> String
+	getContent() == (
+	return content;
+	);
 	
 end Post

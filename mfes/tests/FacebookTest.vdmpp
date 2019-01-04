@@ -4,7 +4,6 @@ class FacebookTest
 
 	 instance variables
 		 u : User := new User("Sofia",mk_User`Date(1,1,2019),"sofia@gmail.com","123");
-		 p : Post := new Post("Olá!");
 		 u2 : User := new User("Joao",mk_User`Date(1,1,2019),"joao@gmail.com","123");
 		 u3 : User := new User("rita",mk_User`Date(1,1,2019),"jose@gmail.com","123");
 		 u4 : User := new User("mario",mk_User`Date(1,1,2019),"jose@gmail.com","123");
@@ -57,7 +56,7 @@ operations
 		 
 		 );
 		 
-		 public static main() ==
+		 public static run() ==
 		 (
 		  new FacebookTest().createUser();
 		  new FacebookTest().logout();
