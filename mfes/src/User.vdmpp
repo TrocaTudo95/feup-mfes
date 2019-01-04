@@ -58,13 +58,7 @@ operations
 		return friends
 		pre true
 		post RESULT=friends;
-		
-	pure public getPosts: () ==> set of Post 
-		getPosts() ==
-		return posts
-		pre true
-		post RESULT= posts;
-	
+
 	public getPosts:  User ==> set of Post 
 		getPosts(u) == (
 		dcl res : set of Post :={};

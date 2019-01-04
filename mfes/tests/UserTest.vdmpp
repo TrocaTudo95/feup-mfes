@@ -16,21 +16,25 @@ class UserTest
 		 pre cond;
 		
 		 --Função que verifica os parametros do utilizador
-		 private verifyUser()==(
+		 private verifyUser: ()==>()
+		 verifyUser()==(
 		  IO`print("\nTest User");
 			assertTrue(u.getName() = "Sofia");
 			assertTrue(u.getBirthday() = mk_User`Date(1,1,2019));
 			assertTrue(u.getEmail() = "sofia@gmail.com");
+			assertTrue(u.getPassword() ="123");
 			);
 			
 		--Função para testar adicionar post
-		 private addPost()==(
+		 private addPost: ()==>()
+		 addPost()==(
 		  IO`print("\nTest Add Post");
 		 	assertTrue(u.hasPost(u.addPost(c,p)) = true);
 		 );
 		 
 		 -- Função para testar mandar pedido de amizade a um utilizador
-		 private sendFriendRequest()==
+		 private sendFriendRequest: ()==>()
+		 sendFriendRequest()==
 		 (
 		 IO`print("\nSend Friend Request test");
 		 assertTrue(u.getNumberOfPendentRequests() = 0);
@@ -41,7 +45,8 @@ class UserTest
 		 );
 		 
 		 --Função para testar aceitar pedido de amizade
-		 private acceptFriendRequest() ==
+		 private acceptFriendRequest: ()==>()
+		 acceptFriendRequest() ==
 		 (
 		 assertTrue(u.hasFriendRequest(u2)=false);
 		 u2.sendFriendRequest(u);
@@ -56,7 +61,8 @@ class UserTest
 		 );
 		 
 		 --Função para testar rejeitar pedido de amizade
-		 private rejectFriendRequest()==
+		 private rejectFriendRequest: ()==>()
+		 rejectFriendRequest()==
 		 (
 		 u2.sendFriendRequest(u);
 		 assertTrue(u.getNumberOfPendentRequests() = 1);
@@ -67,7 +73,8 @@ class UserTest
 		 );
 		 
 		 --Função para testar remover amigo da lista de amigos
-		 private removeFriend() ==
+		 private removeFriend: ()==>()
+		 removeFriend() ==
 		 (
 		 
 		 u2.sendFriendRequest(u);
@@ -79,7 +86,8 @@ class UserTest
 		 assertTrue(u2.hasFriend(u)=false);
 		 );
 		 
-		 public static run() ==
+		 public static run:()==>()
+		 run() ==
 		 (
 		  new UserTest().verifyUser();
 		  new UserTest().addPost();

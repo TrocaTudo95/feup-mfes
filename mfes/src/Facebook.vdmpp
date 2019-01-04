@@ -20,7 +20,6 @@ operations
 	)
   post users = {currentUser} union users~ and RESULT=currentUser;
 
-
 	public login: User`String*User`String ==> User
 		login(e,p) ==(
 		 for all u in set users do(

@@ -47,7 +47,7 @@ operations
 	 	return {u} <: likes
 	 	pre true
 	 	post RESULT = {u} <: likes;
-	 	
+
  	public editPost: String ==>()
 	editPost(c) ==(
 	content := c;
