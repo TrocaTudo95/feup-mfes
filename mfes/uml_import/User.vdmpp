@@ -45,6 +45,13 @@ operations
 	pre true
 	post e=email;
 
+
+public getPassword() p : String ==
+	return password
+	pre true
+	post p=password;
+	
+	
 	public addPost(p:Post) ==
   posts := {p} union posts
  	post posts = {p} union posts~;
