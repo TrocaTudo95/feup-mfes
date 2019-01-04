@@ -4,82 +4,80 @@ types
 	public Date :: day:nat
 							 month:nat
 							 year:nat;
-values
 
 instance variables
-users: set of User := {};
-currentUser : User;
-feed: set of Post := {};
+	users: set of User := {};
+	currentUser : User;
+	feed: set of Post := {};
 
 
 operations
+	public register : User`String*User`Date*User`String*User`String ==> User
+	register(n,b,e,p) ==(
+	currentUser := new User(n,b,e,p);
+	users := {currentUser} union users;
+	return currentUser;
+	)
+  post users = {currentUser} union users~ and RESULT=currentUser;
 
-public register : User`String*User`Date*User`String*User`String ==> ()
-register(n,b,e,p) ==(currentUser := new User(n,b,e,p);
-users := {currentUser} union users;
-return currentUser;
-)
-post users = {currentUser} union users~ and us=currentUser;
 
-
-public login(e: User`String,p:User`String) us:User==
-(
- for all u in set users do
- (
- if u.getEmail()= e 
- then if u.getPassword() =p
- then (IO`print("\n Login Success");
- currentUser:=u; return currentUser;)
- );
- return currentUser;
-)
-post us=currentUser;
+	public login: User`String*User`String ==> User
+		login(e,p) ==(
+		 for all u in set users do(
+		 if u.getEmail()= e 
+		 then if u.getPassword() =p
+		 then (IO`print("\n Login Success");
+		 currentUser:=u; return currentUser;)
+		 );
+		 return currentUser;
+		)
+		post RESULT=currentUser;
 
 	public logout() ==
-	currentUser := new User();
+		currentUser := new User();
 
-	public hasUser(u: User)b:bool ==
- 	return u in set users
- 	pre true
- 	post b= u in set users;
+	public hasUser : User ==> bool
+		hasUser(u) ==
+	 	return u in set users
+	 	pre true
+	 	post RESULT= u in set users;
  	
- 	public getCurrentUser() u:User == 
- 	return currentUser
- 	post u=currentUser;
+ 	public getCurrentUser: () ==> User
+ 		getCurrentUser() == 
+	 	return currentUser
+	 	post RESULT=currentUser;
+	 	
+ 	public recommendUsers: () ==> set of User 
+ 		recommendUsers() ==(
+	 	dcl recommendations: set of User := {};
+	 	dcl friends: set of User := currentUser.getFriends();
+	 	for all u in set friends do(
+		 	dcl friendsOfFriends: set of User := u.getFriends();
+		 	for all f in set friendsOfFriends do(
+			 	if f not in set friends 
+			 	then recommendations := {f} union recommendations;
+		 		)
+	 		);
+	 		return recommendations;
+	 	)
+	 	pre card users >0 and card currentUser.getFriends()>0;
  	
- 	public recommendUsers() us: set of User ==
- 	(
- 	dcl recommendations: set of User := {};
- 	dcl friends: set of User := currentUser.getFriends();
- 	for all u in set friends do(
- 	dcl friendsOfFriends: set of User := u.getFriends();
- 	for all f in set friendsOfFriends do(
- 	if f not in set friends 
- 	then recommendations := {f} union recommendations;
- 	)
- 	);
- 	return recommendations;
- 	)
- 	pre card users >0 and card currentUser.getFriends()>0;
  	
+ 	public hasFriend : User*set of User ==> bool
+ 		hasFriend(u,us) ==
+	 	return u in set us
+	 	pre true
+	 	post RESULT= u in set us;
  	
- 	public hasFriend(u: User, us: set of User)b:bool ==
- 	return u in set us
- 	pre true
- 	post b= u in set us;
- 	
- 	public getFeed() posts: set of Post ==(
+ 	public getFeed: () ==> set of Post
+ 		getFeed() ==(
  	 	dcl friends: set of User := currentUser.getFriends();
  		for all u in set friends do(
 			 	dcl posts: set of Post := u.getPosts(currentUser);
 			 	feed := posts union feed;
- 		);
+ 			);
  		return feed;
  		)
- 	pre currentUser <> undefined;
+ 		pre currentUser <> undefined;
 
-functions 
--- TODO Define functiones here
-traces
--- TODO Define Combinatorial Test Traces here
 end Facebook

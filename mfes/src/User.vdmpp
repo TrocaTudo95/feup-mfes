@@ -21,144 +21,153 @@ instance variables
   password: String;
   
 operations
- 	public User(n: String, b: Date, e: String, p:String) u: User ==
-	(	name := n; 
-		birthday := b;
-		email := e;
-		password := p;
-		return self) 
+ 	public User : String*Date*String*String ==> User 
+ 		User(n,b,e,p)==(	
+ 		name := n; birthday := b;email := e; password := p; return self) 
 		pre len n >0
-	post posts = {} and friends ={} and name = name and pendentFriendRequests={}; 
+		post posts = {} and friends ={} and name = name and pendentFriendRequests={}; 
 
 	
-	public getName() n : String ==
-	return name
-	pre true
-	post n=name;
+	public getName:() ==> String 
+		getName() ==
+		return name
+		pre true
+		post RESULT = name;
 	
-	public getBirthday() d: Date ==
-	return birthday
-	pre true
-	post d=birthday;
+	public getBirthday: () ==> Date
+		getBirthday() ==
+		return birthday
+		pre true
+		post RESULT=birthday;
 	
-	public getEmail() e : String ==
-	return email
-	pre true
-	post e=email;
+	public getEmail: () ==> String 
+		getEmail() ==
+		return email
+		pre true
+		post RESULT=email;
 
 
-	pure public getPassword() p : String ==
-	return password
-	pre true
-	post p=password;
+	pure public getPassword : () ==> String
+		getPassword() ==
+		return password
+		pre true
+		post RESULT=password;
 	
-	pure public getFriends() u : set of User ==
-	return friends
-	pre true
-	post u=friends;
+	pure public getFriends : () ==> set of User
+		getFriends() ==
+		return friends
+		pre true
+		post RESULT=friends;
+		
+	pure public getPosts: () ==> set of Post 
+		getPosts() ==
+		return posts
+		pre true
+		post RESULT= posts;
 	
-	pure public getPosts() p: set of Post ==
-	return posts
-	pre true
-	post p= posts;
+	public getPosts:  User ==> set of Post 
+		getPosts(u) == (
+		dcl res : set of Post :={};
+		for all p in set posts do(
+			if p.isAvailable(u)
+			then res := {p} union res;
+			);
+		return res;
+		);
 	
-	public getPosts(u: User) pst: set of Post ==(
-	dcl res : set of Post :={};
-	for all p in set posts do(
-		if p.isAvailable(u)
-		then res := {p} union res;
-	);
-	return res;
-	);
-	
-	public addPost(c:String, p: Post`Permission) res: Post==( 
-	dcl pst: Post := new Post(c,p,self);
-  posts := {pst} union posts;
-  return pst)
- 	post posts = {res} union posts~;
+	public addPost : String*Post`Permission ==> Post
+		addPost(c,p) ==( 
+		dcl pst: Post := new Post(c,p,self);
+	  posts := {pst} union posts;
+	  return pst)
+	 	post posts = {RESULT} union posts~;
  	
- 	public acceptRequest(f:User) ==
- 	(friends := {f} union friends;
- 	f.addFriend(self);
- 	pendentFriendRequests := pendentFriendRequests \{f}
- 	)
- 	pre card friends < 500
- 	post friends = {f} union friends~ and pendentFriendRequests =pendentFriendRequests~ \{f};
+ 	public acceptRequest : User ==> ()
+ 		acceptRequest(f) ==(
+ 		friends := {f} union friends;
+	 	f.addFriend(self);
+	 	pendentFriendRequests := pendentFriendRequests \{f}
+	 	)
+	 	pre card friends < 500
+	 	post friends = {f} union friends~ and pendentFriendRequests =pendentFriendRequests~ \{f};
+	 	
+ 	public rejectRequest : User==> ()
+ 		rejectRequest(f) == (
+	 	pendentFriendRequests := pendentFriendRequests \{f}
+	 	)
+	 	pre f in set pendentFriendRequests
+	 	post f not in set pendentFriendRequests; 
+	 	
+ 	public sendFriendRequest : User==>()
+ 		sendFriendRequest(f) ==
+	 	f.addFriendRequest(self);
  	
- 	public rejectRequest(f:User) ==
- 	(
- 	pendentFriendRequests := pendentFriendRequests \{f}
- 	)
- 	pre f in set pendentFriendRequests
- 	post f not in set pendentFriendRequests; 
- 	
- 	public sendFriendRequest(f:User) ==
- 	f.addFriendRequest(self)
- 	pre true
- 	post true;
- 	
- 	public addFriend(f:User) ==
- 	friends := {f} union friends
- 	pre card friends < 500
- 	post friends = {f} union friends~;
+ 	public addFriend :  User==>()
+ 		addFriend(f) ==
+	 	friends := {f} union friends
+	 	pre card friends < 500
+	 	post friends = {f} union friends~;
  	
  	
- 	public addFriendRequest(f:User) ==
- 	pendentFriendRequests := {f} union pendentFriendRequests
- 	pre true
- 	post pendentFriendRequests = {f} union pendentFriendRequests~;
+ 	public addFriendRequest : User==>()
+ 		addFriendRequest(f) ==
+	 	pendentFriendRequests := {f} union pendentFriendRequests
+	 	pre true
+	 	post pendentFriendRequests = {f} union pendentFriendRequests~;
+	 	
+ 	public unfriend : User ==> ()
+ 		unfriend(f) ==
+	 	(removeFriend(f);
+	 	f.removeFriend(self);
+	 	)
+	 	post f not in set friends;
  	
- 	public unfriend( f:User) ==
- 	(removeFriend(f);
- 	f.removeFriend(self);
- 	)
- 	post f not in set friends;
- 	
- 	public removeFriend(f:User) ==
- 	friends := friends \{f}
- 	post friends =friends~ \{f};
+ 	public removeFriend : User ==> ()
+ 		removeFriend(f) ==
+	 	friends := friends \{f}
+	 	post friends =friends~ \{f};
 
- 	public getNumberOfFriends() n:nat ==
- 	return card friends
- 	pre true
- 	post n= card friends;
+ 	public getNumberOfFriends : () ==> nat
+ 		getNumberOfFriends() ==
+	 	return card friends
+	 	pre true
+	 	post RESULT= card friends;
  	
- 	public getNumberOfPendentRequests()n:nat ==
- 	return card pendentFriendRequests
- 	pre true
- 	post n= card pendentFriendRequests;
+ 	public getNumberOfPendentRequests : () ==> nat
+ 		getNumberOfPendentRequests() ==
+	 	return card pendentFriendRequests
+	 	pre true
+	 	post RESULT= card pendentFriendRequests;
+	 	
+ 	public hasPost : Post ==> bool 
+ 		hasPost(p) ==
+	 	return p in set posts
+	 	pre true
+	 	post RESULT= p in set posts;
+	 	
+ 	public hasFriend : User ==> bool
+ 		hasFriend(u) ==
+	 	return u in set friends
+	 	pre true
+	 	post RESULT= u in set friends;
  	
- 	public hasPost(p: Post)b:bool ==
- 	return p in set posts
- 	pre true
- 	post b= p in set posts;
- 	
- 	public hasFriend(u: User)b:bool ==
- 	return u in set friends
- 	pre true
- 	post b= u in set friends;
- 	
-	public hasFriendRequest(u: User)b:bool ==
- 	return u in set pendentFriendRequests
- 	pre true
- 	post b= u in set pendentFriendRequests;
+	public hasFriendRequest : User ==> bool
+		hasFriendRequest(u) ==
+	 	return u in set pendentFriendRequests
+	 	pre true
+	 	post RESULT= u in set pendentFriendRequests;
  	
  	public addToFamily: User ==> ()
- 	addToFamily(u) == (
- 	family := {u} union family)
- 	post family = {u} union family;
+	 	addToFamily(u) == (
+	 	family := {u} union family)
+	 	post family = {u} union family;
  	
  	public getPermission: User ==> Post`Permission
- 	getPermission(u) ==(
- 	if u = self
- 	then return "family";
- 	if u in set family
- 	then return "family"
- 	else return "public");
- 	
- 	
-functions
-
-
-	
+	 	getPermission(u) ==(
+	 	if u = self
+	 	then return "family";
+	 	if u in set family
+	 	then return "family"
+	 	else return "public");
+	 		
 end User
