@@ -48,7 +48,7 @@ post us=currentUser;
  	
  	public recommendUsers() us: set of User ==
  	(
- 	dcl recommendations: set of User;
+ 	dcl recommendations: set of User := {};
  	dcl friends: set of User := currentUser.getFriends();
  	for all u in set friends do(
  	dcl friendsOfFriends: set of User := u.getFriends();
@@ -61,6 +61,11 @@ post us=currentUser;
  	)
  	pre card users >0;
  	
+ 	
+ 	public hasFriend(u: User, us: set of User)b:bool ==
+ 	return u in set us
+ 	pre true
+ 	post b= u in set us;
 
 functions 
 -- TODO Define functiones here
