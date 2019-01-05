@@ -86,6 +86,7 @@ public class Gui {
 			showFeed();
 			break;
 		 case 2:
+			 showUsers(facebook.recommendUsers());
 			 break;
 		 case 3:
 			 break;
@@ -99,7 +100,7 @@ public class Gui {
 			 break;
 			 
 		 case 7:
-			 showUsers();
+			 showUsers(facebook.getUsers());
 			 break;
 		 case 8:
 			 logout();
@@ -122,9 +123,41 @@ public class Gui {
 	 }
 	 
 	
-
-	private static void showUsers() {
-		  VDMSet users = facebook.getUsers();
+	 private static void showFriends( VDMSet users) {
+			
+		  Iterator<User> it=users.iterator();
+		 int option=1;
+		  while(it.hasNext()) {
+			  User u = (User) it.next();
+			  System.out.print(option +"-");
+			  System.out.println(u);
+			  
+		  }
+		  option = getNextChoice();
+		  User u = getSelectedUser(option, users);
+		  option=0;
+		  
+		  while(option<1 ||option >3) {
+		  System.out.println("1 - Show Profile");
+		  System.out.println("2 - Back");
+		  option = getNextChoice();
+		  }
+		  
+		  switch(option) {
+			 case 1:
+				 showProfile(u);
+				 break;
+			 case 2:
+				 userMenu();
+				 break;
+			
+			 }
+			 
+		  
+		
+	}
+	private static void showUsers( VDMSet users) {
+		
 		  Iterator<User> it=users.iterator();
 		 int option=1;
 		  while(it.hasNext()) {
