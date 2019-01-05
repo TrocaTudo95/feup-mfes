@@ -105,7 +105,7 @@ operations
  	public addFriend :  User==>()
  		addFriend(f) ==
 	 	friends := {f} union friends
-	 	pre card friends < 500
+	 	pre card friends < 500 and f not in set friends and f <> self
 	 	post friends = {f} union friends~;
  	
  	

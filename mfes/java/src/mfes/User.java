@@ -164,22 +164,10 @@ public class User {
   public String toString() {
 
     return "User{"
-        + "posts := "
-        + Utils.toString(posts)
-        + ", friends := "
-        + Utils.toString(friends)
-        + ", pendentFriendRequests := "
-        + Utils.toString(pendentFriendRequests)
-        + ", family := "
-        + Utils.toString(family)
-        + ", birthday := "
-        + Utils.toString(birthday)
         + ", email := "
         + Utils.toString(email)
         + ", name := "
         + Utils.toString(name)
-        + ", password := "
-        + Utils.toString(password)
         + "}";
   }
 

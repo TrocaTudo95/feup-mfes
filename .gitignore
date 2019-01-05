@@ -1,2 +1,4 @@
 mfes/.project
 mfes/generated
+mfes/java/bin/mfes/*.class
+mfes/java/bin/gui/*.class

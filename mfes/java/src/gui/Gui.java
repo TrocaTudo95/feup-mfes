@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Iterator;
 
+import org.overture.codegen.runtime.VDMSet;
+
+
 import mfes.Facebook;
 import mfes.Post;
 import mfes.User;
@@ -58,7 +61,8 @@ public class Gui {
 	 
 	 private static void userMenu() {
 		 int option=0;
-		 while(option<1 ||option >7) {
+		 while(option<1 ||option >8) {
+
 			clearScreen();
 			System.out.println("#################################################################");
 			System.out.println("############                Welcome                  ############");
@@ -69,7 +73,8 @@ public class Gui {
 			System.out.println("4 - Show Profile");
 			System.out.println("5 - Show Friend Requests");
 			System.out.println("6 - Add Post");
-			System.out.println("7 - Logout");
+			System.out.println("7 - Show Users");
+			System.out.println("8 - Logout");
 			System.out.print("\nOption: ");
 			option= getNextChoice();
 		 }
@@ -92,11 +97,69 @@ public class Gui {
 		 case 6:
 			 addPost();
 			 break;
+			 
 		 case 7:
+			 showUsers();
+			 break;
+		 case 8:
 			 logout();
 			 initialMenu();
 			 break;
 	 	}
+	}
+	 
+	 private static User getSelectedUser(int i, VDMSet users ) {
+		  Iterator<User> it=users.iterator();
+		  int option=1;
+		  while(it.hasNext()) {
+			  //User auxUser = it.next();
+			  User u =it.next();
+			  if(option== i)
+				  return  u;
+			  option++;
+		  }
+		  return null;
+	 }
+	 
+	
+
+	private static void showUsers() {
+		  VDMSet users = facebook.getUsers();
+		  Iterator<User> it=users.iterator();
+		 int option=1;
+		  while(it.hasNext()) {
+			  User u = (User) it.next();
+			  System.out.print(option +"-");
+			  System.out.println(u);
+			  
+		  }
+		  option = getNextChoice();
+		  User u = getSelectedUser(option, users);
+		  option=0;
+		  
+		  while(option<1 ||option >3) {
+		  System.out.println("1 - Add Friend");
+		  System.out.println("2 - Show Profile");
+		  System.out.println("3 - Back");
+		  option = getNextChoice();
+		  }
+		  
+		  switch(option) {
+			 case 1:
+				facebook.currentUser.addFriend(u);
+				userMenu();
+				break;
+			 case 2:
+				 showProfile(u);
+				 break;
+			 case 3:
+				 userMenu();
+				 break;
+			
+			 }
+			 
+		  
+		
 	}
 
 	private static void showProfile(User user) {
