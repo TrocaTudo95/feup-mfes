@@ -43,7 +43,7 @@ public class Gui {
 		 clearScreen();
 			System.out.println("#################################################################");
 			System.out.println("############               Register                  ############");
-			System.out.println("#################################################################\n\n");
+			System.out.println("#################################################################\n");
 			System.out.println("Insert your Name:");
 			name= readStringfromKeyBoard() ;
 			System.out.println("Insert your Email:");
@@ -66,7 +66,7 @@ public class Gui {
 			clearScreen();
 			System.out.println("#################################################################");
 			System.out.println("############                Welcome                  ############");
-			System.out.println("#################################################################\n\n");
+			System.out.println("#################################################################\n");
 			System.out.println("1 - Show Feed");
 			System.out.println("2 - Show Recomendations");
 			System.out.println("3 - Show Friends");
@@ -93,11 +93,11 @@ public class Gui {
 			 showProfile(facebook.getCurrentUser());
 			 break;
 		 case 5:
+			 showFriendsRequests();
 			 break;
 		 case 6:
 			 addPost();
 			 break;
-			 
 		 case 7:
 			 showUsers();
 			 break;
@@ -108,7 +108,56 @@ public class Gui {
 	 	}
 	}
 	 
-	 private static User getSelectedUser(int i, VDMSet users ) {
+	 private static void showFriendsRequests() {
+		System.out.println("#################################################################");
+		System.out.println("############           Friend Requests               ############");
+		System.out.println("#################################################################\n");
+		 VDMSet requests = facebook.getCurrentUser().getFriendRequests();
+		 Iterator<User> it=requests.iterator();
+		 int option=1;
+		  while(it.hasNext()) {
+			  User u = (User) it.next();
+			  System.out.print(option +"-");
+			  System.out.println(u);
+			  option++;
+			  
+		  }
+		  
+		  System.out.print("\nRequest: ");
+		  option = getNextChoice();
+		  User u = getSelectedUser(option, requests);
+		  option=0;
+		  
+		  clearScreen();
+		  System.out.println(u.getName());
+		  System.out.println("-----------------------------------");
+		  
+		  while(option<1 ||option >3) {
+		  System.out.println("1 - Accept");
+		  System.out.println("2 - Refuse");
+		  System.out.println("3 - Back");
+		  System.out.print("\nOption: ");
+		  option = getNextChoice();
+		  }
+		  
+		  switch(option) {
+			 case 1:
+				facebook.currentUser.acceptRequest(u);
+				userMenu();
+				break;
+			 case 2:
+				 facebook.currentUser.rejectRequest(u);
+				 userMenu();
+				 break;
+			 case 3:
+				 userMenu();
+				 break;
+			
+			 }
+		
+	}
+
+	private static User getSelectedUser(int i, VDMSet users ) {
 		  Iterator<User> it=users.iterator();
 		  int option=1;
 		  while(it.hasNext()) {
@@ -124,6 +173,9 @@ public class Gui {
 	
 
 	private static void showUsers() {
+		System.out.println("#################################################################");
+		System.out.println("############                Users                    ############");
+		System.out.println("#################################################################\n");
 		  VDMSet users = facebook.getUsers();
 		  Iterator<User> it=users.iterator();
 		 int option=1;
@@ -133,20 +185,27 @@ public class Gui {
 			  System.out.println(u);
 			  
 		  }
+		  
+		  System.out.print("\nUser: ");
 		  option = getNextChoice();
 		  User u = getSelectedUser(option, users);
 		  option=0;
+		  
+		  clearScreen();
+		  System.out.println(u.getName());
+		  System.out.println("-----------------------------------");
 		  
 		  while(option<1 ||option >3) {
 		  System.out.println("1 - Add Friend");
 		  System.out.println("2 - Show Profile");
 		  System.out.println("3 - Back");
+		  System.out.print("\nOption: ");
 		  option = getNextChoice();
 		  }
 		  
 		  switch(option) {
 			 case 1:
-				facebook.currentUser.addFriend(u);
+				facebook.currentUser.sendFriendRequest(u);
 				userMenu();
 				break;
 			 case 2:
@@ -157,9 +216,6 @@ public class Gui {
 				 break;
 			
 			 }
-			 
-		  
-		
 	}
 
 	private static void showProfile(User user) {
@@ -188,7 +244,7 @@ public class Gui {
 	private static void addPost() {
 		System.out.println("#################################################################");
 		System.out.println("############                Add Post                 ############");
-		System.out.println("#################################################################\n\n");
+		System.out.println("#################################################################\n");
 		
 		String content;
 		String permission;
@@ -219,7 +275,7 @@ public class Gui {
 		 clearScreen();
 			System.out.println("#################################################################");
 			System.out.println("############               Register                  ############");
-			System.out.println("#################################################################\n\n");
+			System.out.println("#################################################################\n");
 			System.out.println("1 - Register");
 			System.out.println("2 - Login");
 			System.out.print("\nOption: ");
@@ -243,7 +299,7 @@ public class Gui {
 			clearScreen();
 			System.out.println("#################################################################");
 			System.out.println("############                 Login                   ############");
-			System.out.println("#################################################################\n\n");
+			System.out.println("#################################################################\n");
 			System.out.println("Insert your Email:");
 			email= readStringfromKeyBoard() ;
 			System.out.println("Insert your Password:");
@@ -256,6 +312,8 @@ public class Gui {
 	}
 
 		public static void main(String [] args) {
+			facebook.register("sofia", new User.Date("19/06/1997"),"sofia@gmail.com", "123");
+			facebook.register("jose", new User.Date("02/12/1997"),"jose@gmail.com", "123");
 			initialMenu();
 	 }
 }
