@@ -289,10 +289,13 @@ public class Gui {
 						  while(it2.hasNext()) {
 							  reaction ++;
 							  String u = (String) it2.next();
-							  System.out.print(option +"-");
+							  System.out.print(reaction +"-");
 							  System.out.println(u);
 							  
 						  }
+						  System.out.println("-----------------------------------");
+						  System.out.println("Choose your reaction:");
+						  reaction = getNextChoice();
 						  String rec = getSelectedReaction(reaction,Post.Reactions);
 						 p.like(facebook.currentUser,rec);
 						 

@@ -134,6 +134,6 @@ public class Post {
 
   public String toString() {
 
-    return "- " + content + "\n";
+    return content+  " " + likes.size()+ " likes \n";
   }
 }
