@@ -450,8 +450,14 @@ public class Gui {
 	}
 
 		public static void main(String [] args) {
-			facebook.register("sofia", new User.Date("19/06/1997"),"sofia@gmail.com", "123");
-			facebook.register("jose", new User.Date("02/12/1997"),"jose@gmail.com", "123");
+			User sofia = facebook.register("sofia", new User.Date("19/06/1997"),"sofia@gmail.com", "123");
+			User jose = facebook.register("jose", new User.Date("02/12/1997"),"jose@gmail.com", "123");
+			
+			sofia.addFriend(jose);
+			jose.addFriend(sofia);
+			
+			sofia.addPost("I am a public post!", "public");
+			
 			initialMenu();
 	 }
 }
