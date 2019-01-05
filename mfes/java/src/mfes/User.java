@@ -53,6 +53,11 @@ public class User {
     return Utils.copy(friends);
   }
   
+  public VDMSet getFriendRequests() {
+
+	  return Utils.copy(pendentFriendRequests);
+  }
+  
   public VDMSet getPosts(final User u) {
 
     VDMSet res = SetUtil.set();
@@ -162,13 +167,7 @@ public class User {
   public User() {}
 
   public String toString() {
-
-    return "User{"
-        + ", email := "
-        + Utils.toString(email)
-        + ", name := "
-        + Utils.toString(name)
-        + "}";
+    return  "Name: " + Utils.toString(name) + " | Email: " + Utils.toString(email);
   }
 
   public static class Date implements Record {
