@@ -66,7 +66,8 @@ public class Gui {
 			System.out.println("3 - Show Friends");
 			System.out.println("4 - Show Profile");
 			System.out.println("5 - Show Friend Requests");
-			System.out.println("6 - Logout");
+			System.out.println("6 - Add Post");
+			System.out.println("7 - Logout");
 			System.out.print("\nOption: ");
 			option= getNextChoice();
 		 }
@@ -77,7 +78,21 @@ public class Gui {
 		 case 1:
 			showFeed();
 			break;
-		 }
+		 case 2:
+			 break;
+		 case 3:
+			 break;
+		 case 4:
+			 break;
+		 case 5:
+			 break;
+		 case 6:
+			 break;
+		 case 7:
+			 logout();
+			 initialMenu();
+			 break;
+	 	}
 	}
 
 	private static void showFeed() {
@@ -85,11 +100,11 @@ public class Gui {
 		
 	}
 	
-	public static void Logout() {
+	public static void logout() {
 		facebook.logout();
 	}
 
-	public static void initalMenu() {
+	public static void initialMenu() {
 		 int option=0;
 		 while(option<1 ||option >2) {
 		 clearScreen();
@@ -132,6 +147,6 @@ public class Gui {
 	}
 
 		public static void main(String [] args) {
-			initalMenu();
+			initialMenu();
 	 }
 }
