@@ -383,7 +383,7 @@ public class Gui {
 	}
 
 	private static void showFeed() {
-		System.out.println(facebook.getFeed());
+		showPosts(facebook.getFeed());
 		
 	}
 	
