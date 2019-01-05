@@ -7,6 +7,7 @@ import org.overture.codegen.runtime.*;
 public class Post {
   public static final VDMSet Reactions =
       SetUtil.set("sad", "love", "like", "angry", "surprise", "laugh");
+
   public static final VDMSet Permissions = SetUtil.set("public", "family");
   private User owner;
   private VDMSet comments = SetUtil.set();
@@ -15,7 +16,6 @@ public class Post {
   private String content;
 
   public void cg_init_Post_1(final String c, final String p, final User o) {
-
     content = c;
     permission = p;
     owner = o;
