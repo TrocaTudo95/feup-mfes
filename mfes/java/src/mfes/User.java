@@ -215,7 +215,7 @@ public class User {
 
     public String toString() {
 
-      return Utils.formatFields(day, month, year);
+      return day + "/" + month + "/" + year;
     }
   }
 
