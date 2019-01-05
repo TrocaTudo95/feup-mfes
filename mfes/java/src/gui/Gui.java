@@ -131,6 +131,7 @@ public class Gui {
 			  User u = (User) it.next();
 			  System.out.print(option +"-");
 			  System.out.println(u);
+			  option ++;
 			  
 		  }
 		  option = getNextChoice();
@@ -139,7 +140,8 @@ public class Gui {
 		  
 		  while(option<1 ||option >3) {
 		  System.out.println("1 - Show Profile");
-		  System.out.println("2 - Back");
+		  System.out.println("2 - Remove Friend");
+		  System.out.println("3 - Back");
 		  option = getNextChoice();
 		  }
 		  
@@ -148,6 +150,10 @@ public class Gui {
 				 showProfile(u);
 				 break;
 			 case 2:
+				 facebook.currentUser.unfriend(u);
+				 userMenu();
+				 break;
+			 case 3:
 				 userMenu();
 				 break;
 			
@@ -164,6 +170,7 @@ public class Gui {
 			  User u = (User) it.next();
 			  System.out.print(option +"-");
 			  System.out.println(u);
+			  option ++;
 			  
 		  }
 		  option = getNextChoice();
