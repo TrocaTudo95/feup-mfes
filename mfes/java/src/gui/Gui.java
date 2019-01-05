@@ -11,10 +11,6 @@ public class Gui {
 	 private static Facebook facebook = new Facebook();
 	 static BufferedReader buffer=new BufferedReader(new InputStreamReader(System.in));
 	 
-	 
-	 
-	 
-	 
 	 public static void clearScreen() {  
 		    for(int i = 0; i < 50; i++)
 		    	System.out.println("");
@@ -53,16 +49,39 @@ public class Gui {
 			date= readStringfromKeyBoard() ;
 			date2 =new User.Date(date);
 			User user = facebook.register(name,date2,email,password);
-			
-			clearScreen();
-			userMenu(user);
-		
-			
+
+			userMenu(user);	
 	 }
 	 
 	 
 	 private static void userMenu(User user) {
-			System.out.println( "WELCOME " + user.getName());
+		 int option=0;
+		 while(option<1 ||option >3) {
+			clearScreen();
+			System.out.println("#################################################################");
+			System.out.println("############                Welcome                  ############");
+			System.out.println("#################################################################\n\n");
+			System.out.println("1 - Show Feed");
+			System.out.println("2 - Show Recomendations");
+			System.out.println("3 - Show Friends");
+			System.out.println("4 - Show Profile");
+			System.out.println("5 - Show Friend Requests");
+			System.out.println("6 - Logout");
+			System.out.print("\nOption: ");
+			option= getNextChoice();
+		 }
+		 
+		 clearScreen();
+		
+		 switch(option) {
+		 case 1:
+			showFeed();
+			break;
+		 }
+	}
+
+	private static void showFeed() {
+		System.out.println(facebook.getFeed());
 		
 	}
 
@@ -76,9 +95,8 @@ public class Gui {
 			System.out.println("1 - Register");
 			System.out.println("2 - Login");
 			System.out.println("3 - Logout");
+			System.out.print("\nOption: ");
 			option= getNextChoice();
-		
-	 
 	 }
 		 
 		 switch(option) {
