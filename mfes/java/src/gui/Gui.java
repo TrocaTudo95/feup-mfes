@@ -35,6 +35,7 @@ public class Gui {
 			} catch (Exception e) {}
 			return usrInput;
 	}
+	 
 	 public static void registerMenu() {
 		 String name,email,password,date;
 		 User.Date date2 ;
@@ -51,18 +52,26 @@ public class Gui {
 			System.out.println("Insert your birthday date (YYYY/MM/DD):");
 			date= readStringfromKeyBoard() ;
 			date2 =new User.Date(date);
-			facebook.register(name,date2,email,password);		
+			User user = facebook.register(name,date2,email,password);
 			
+			clearScreen();
+			userMenu(user);
+		
 			
 	 }
 	 
 	 
-	 public static void initalMenu() {
+	 private static void userMenu(User user) {
+			System.out.println( "WELCOME " + user.getName());
+		
+	}
+
+	public static void initalMenu() {
 		 int option=0;
 		 while(option<1 ||option >3) {
 		 clearScreen();
 			System.out.println("#################################################################");
-			System.out.println("############               Facebook                  ############");
+			System.out.println("############               Register                  ############");
 			System.out.println("#################################################################\n\n");
 			System.out.println("1 - Register");
 			System.out.println("2 - Login");
@@ -76,9 +85,27 @@ public class Gui {
 		 case 1:
 			registerMenu();
 			break;
-	 }
+		 case 2:
+			 loginMenu();
+			 break;
+		 }
+		 
 	 }
 	 
+		private static void loginMenu() {
+			String email,password;
+			clearScreen();
+			System.out.println("#################################################################");
+			System.out.println("############                 Login                   ############");
+			System.out.println("#################################################################\n\n");
+			System.out.println("Insert your Email:");
+			email= readStringfromKeyBoard() ;
+			System.out.println("Insert your Password:");
+			password = readStringfromKeyBoard();
+		
+		
+	}
+
 		public static void main(String [] args) {
 			initalMenu();
 	 }
