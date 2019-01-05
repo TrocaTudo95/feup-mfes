@@ -457,6 +457,7 @@ public class Gui {
 			jose.addFriend(sofia);
 			
 			sofia.addPost("I am a public post!", "public");
+			sofia.addPost("I am a family post!", "family");
 			
 			initialMenu();
 	 }
