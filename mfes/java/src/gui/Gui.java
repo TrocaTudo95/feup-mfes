@@ -2,8 +2,10 @@ package gui;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Iterator;
 
 import mfes.Facebook;
+import mfes.Post;
 import mfes.User;
 
 
@@ -48,15 +50,15 @@ public class Gui {
 			System.out.println("Insert your birthday date (YYYY/MM/DD):");
 			date= readStringfromKeyBoard() ;
 			date2 =new User.Date(date);
-			User user = facebook.register(name,date2,email,password);
+			facebook.register(name,date2,email,password);
 
-			userMenu(user);	
+			userMenu();	
 	 }
 	 
 	 
-	 private static void userMenu(User user) {
+	 private static void userMenu() {
 		 int option=0;
-		 while(option<1 ||option >3) {
+		 while(option<1 ||option >7) {
 			clearScreen();
 			System.out.println("#################################################################");
 			System.out.println("############                Welcome                  ############");
@@ -83,16 +85,60 @@ public class Gui {
 		 case 3:
 			 break;
 		 case 4:
+			 showProfile(facebook.getCurrentUser());
 			 break;
 		 case 5:
 			 break;
 		 case 6:
+			 addPost();
 			 break;
 		 case 7:
 			 logout();
 			 initialMenu();
 			 break;
 	 	}
+	}
+
+	private static void showProfile(User user) {
+		System.out.println("#################################################################");
+		System.out.println("############                Profile                  ############");
+		System.out.println("#################################################################\n");
+		
+		System.out.println("Name: " + user.getName());
+		System.out.println("Email: " + user.getEmail());
+		System.out.println("Birthdate: " + user.getBirthday());
+		
+		System.out.println("\n##########################    Post    ##########################\n");
+		
+		Iterator<Post> it = user.getPosts(facebook.getCurrentUser()).iterator();
+		
+	      while(it.hasNext()) {
+	    	  Post aux = it.next();
+	    	  System.out.println(aux);
+	      }
+		
+		System.out.println("PRESS ANY KEY TO GO BACK");
+		readStringfromKeyBoard();
+		userMenu();
+	}
+
+	private static void addPost() {
+		System.out.println("#################################################################");
+		System.out.println("############                Add Post                 ############");
+		System.out.println("#################################################################\n\n");
+		
+		String content;
+		String permission;
+		
+		System.out.println("Contents:");
+		content= readStringfromKeyBoard() ;
+		System.out.println("Permissions (public/family):");
+		permission = readStringfromKeyBoard();
+		
+		facebook.getCurrentUser().addPost(content, permission);
+		
+		userMenu();
+		
 	}
 
 	private static void showFeed() {
@@ -142,7 +188,7 @@ public class Gui {
 			
 			User user = facebook.login(email, password);
 			clearScreen();
-			userMenu(user);
+			userMenu();
 		
 	}
 
