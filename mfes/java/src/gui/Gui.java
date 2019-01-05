@@ -89,6 +89,7 @@ public class Gui {
 			 showUsers(facebook.recommendUsers());
 			 break;
 		 case 3:
+			 showFriends(facebook.currentUser.getFriends());
 			 break;
 		 case 4:
 			 showProfile(facebook.getCurrentUser());
@@ -172,6 +173,9 @@ public class Gui {
 	 }
 	 
 	 private static void showFriends( VDMSet users) {
+		System.out.println("#################################################################");
+		System.out.println("############               Friends                   ############");
+		System.out.println("#################################################################\n");
 			
 		  Iterator<User> it=users.iterator();
 		 int option=1;
@@ -182,14 +186,22 @@ public class Gui {
 			  option ++;
 			  
 		  }
+		  System.out.print("\nFriend: ");
 		  option = getNextChoice();
 		  User u = getSelectedUser(option, users);
 		  option=0;
 		  
+		  clearScreen();
+		  
+		  System.out.println(u.getName());
+		  System.out.println("-----------------------------------");
+		  
 		  while(option<1 ||option >3) {
 		  System.out.println("1 - Show Profile");
 		  System.out.println("2 - Remove Friend");
-		  System.out.println("3 - Back");
+		  System.out.println("3 - Add to Family");
+		  System.out.println("4 - Back");
+		  System.out.print("\nOption: ");
 		  option = getNextChoice();
 		  }
 		  
@@ -202,6 +214,10 @@ public class Gui {
 				 userMenu();
 				 break;
 			 case 3:
+				 facebook.currentUser.addToFamily(u);
+				 userMenu();
+				 break;
+			 case 4:
 				 userMenu();
 				 break;
 			
