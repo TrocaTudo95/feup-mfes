@@ -194,6 +194,13 @@ public class User {
       month = _month;
       year = _year;
     }
+    
+    public Date(String date) {
+    	String[] date1 = date.split("/");
+        day =  Integer.parseInt(date1[0]);
+        month = Integer.parseInt(date1[1]);;
+        year = Integer.parseInt(date1[2]);
+      }
 
     public boolean equals(final Object obj) {
 

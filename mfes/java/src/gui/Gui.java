@@ -4,10 +4,11 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 import mfes.Facebook;
+import mfes.User;
 
 
 public class Gui {
-	 private Facebook facebook = new Facebook();
+	 private static Facebook facebook = new Facebook();
 	 static BufferedReader buffer=new BufferedReader(new InputStreamReader(System.in));
 	 
 	 
@@ -35,7 +36,8 @@ public class Gui {
 			return usrInput;
 	}
 	 public static void registerMenu() {
-		 String name,email,password;
+		 String name,email,password,date;
+		 User.Date date2 ;
 		 clearScreen();
 			System.out.println("#################################################################");
 			System.out.println("############               Facebook                  ############");
@@ -45,9 +47,11 @@ public class Gui {
 			System.out.println("Insert your Email:");
 			email= readStringfromKeyBoard() ;
 			System.out.println("Insert your Password:");
-			email= readStringfromKeyBoard() ;
-			
-			
+			password= readStringfromKeyBoard() ;
+			System.out.println("Insert your birthday date (YYYY/MM/DD):");
+			date= readStringfromKeyBoard() ;
+			date2 =new User.Date(date);
+			facebook.register(name,date2,email,password);		
 			
 			
 	 }

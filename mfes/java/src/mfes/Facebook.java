@@ -6,7 +6,7 @@ import org.overture.codegen.runtime.*;
 @SuppressWarnings("all")
 public class Facebook {
   private VDMSet users = SetUtil.set();
-  private User currentUser;
+  public static User currentUser;
   private VDMSet feed = SetUtil.set();
 
   public User register(final String n, final User.Date b, final String e, final String p) {
