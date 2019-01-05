@@ -32,7 +32,8 @@ operations
 		)
 		post RESULT=currentUser;
 
-	public logout() ==
+	public logout: () ==> ()
+	logout()==
 		currentUser := new User();
 
 	public hasUser : User ==> bool

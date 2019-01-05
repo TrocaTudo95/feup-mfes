@@ -6,7 +6,7 @@ import org.overture.codegen.runtime.*;
 @SuppressWarnings("all")
 public class Facebook {
   private VDMSet users = SetUtil.set();
-  public static User currentUser;
+  private User currentUser;
   private VDMSet feed = SetUtil.set();
 
   public User register(final String n, final User.Date b, final String e, final String p) {
@@ -33,7 +33,7 @@ public class Facebook {
 
   public void logout() {
 
-    throw new UnsupportedOperationException();
+    currentUser = new User();
   }
 
   public Boolean hasUser(final User u) {

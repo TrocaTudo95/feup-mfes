@@ -37,7 +37,7 @@ public class Gui {
 		 User.Date date2 ;
 		 clearScreen();
 			System.out.println("#################################################################");
-			System.out.println("############               Facebook                  ############");
+			System.out.println("############               Register                  ############");
 			System.out.println("#################################################################\n\n");
 			System.out.println("Insert your Name:");
 			name= readStringfromKeyBoard() ;
@@ -84,17 +84,20 @@ public class Gui {
 		System.out.println(facebook.getFeed());
 		
 	}
+	
+	public static void Logout() {
+		facebook.logout();
+	}
 
 	public static void initalMenu() {
 		 int option=0;
-		 while(option<1 ||option >3) {
+		 while(option<1 ||option >2) {
 		 clearScreen();
 			System.out.println("#################################################################");
 			System.out.println("############               Register                  ############");
 			System.out.println("#################################################################\n\n");
 			System.out.println("1 - Register");
 			System.out.println("2 - Login");
-			System.out.println("3 - Logout");
 			System.out.print("\nOption: ");
 			option= getNextChoice();
 	 }
@@ -106,6 +109,7 @@ public class Gui {
 		 case 2:
 			 loginMenu();
 			 break;
+		
 		 }
 		 
 	 }
@@ -120,7 +124,10 @@ public class Gui {
 			email= readStringfromKeyBoard() ;
 			System.out.println("Insert your Password:");
 			password = readStringfromKeyBoard();
-		
+			
+			User user = facebook.login(email, password);
+			clearScreen();
+			userMenu(user);
 		
 	}
 
