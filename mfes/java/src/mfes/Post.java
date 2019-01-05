@@ -134,6 +134,15 @@ public class Post {
 
   public String toString() {
 
-    return content+  " " + likes.size()+ " likes \n";
+    String result =  content+  " " + likes.size()+ " likes \n" ;
+    
+    Iterator<Comment> it = comments.iterator();
+
+	  while(it.hasNext()) {
+		  Comment c = (Comment) it.next();
+		  result += c;
+	  }
+    
+    return result;
   }
 }
