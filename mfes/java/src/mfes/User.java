@@ -52,7 +52,7 @@ public class User {
 
     return Utils.copy(friends);
   }
-
+  
   public VDMSet getPosts(final User u) {
 
     VDMSet res = SetUtil.set();
@@ -215,7 +215,7 @@ public class User {
 
     public String toString() {
 
-      return "mk_User`Date" + Utils.formatFields(day, month, year);
+      return Utils.formatFields(day, month, year);
     }
   }
 

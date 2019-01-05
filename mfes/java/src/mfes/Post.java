@@ -134,21 +134,6 @@ public class Post {
 
   public String toString() {
 
-    return "Post{"
-        + "Reactions = "
-        + Utils.toString(Reactions)
-        + ", Permissions = "
-        + Utils.toString(Permissions)
-        + ", owner := "
-        + Utils.toString(owner)
-        + ", comments := "
-        + Utils.toString(comments)
-        + ", permission := "
-        + Utils.toString(permission)
-        + ", likes := "
-        + Utils.toString(likes)
-        + ", content := "
-        + Utils.toString(content)
-        + "}";
+    return "- " + content + "\n";
   }
 }

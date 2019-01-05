@@ -6,7 +6,9 @@ import java.util.Iterator;
 
 import org.overture.codegen.runtime.VDMSet;
 
+
 import mfes.Facebook;
+import mfes.Post;
 import mfes.User;
 
 
@@ -51,15 +53,16 @@ public class Gui {
 			System.out.println("Insert your birthday date (YYYY/MM/DD):");
 			date= readStringfromKeyBoard() ;
 			date2 =new User.Date(date);
-			User user = facebook.register(name,date2,email,password);
+			facebook.register(name,date2,email,password);
 
-			userMenu(user);	
+			userMenu();	
 	 }
 	 
 	 
-	 private static void userMenu(User user) {
+	 private static void userMenu() {
 		 int option=0;
 		 while(option<1 ||option >8) {
+
 			clearScreen();
 			System.out.println("#################################################################");
 			System.out.println("############                Welcome                  ############");
@@ -87,10 +90,12 @@ public class Gui {
 		 case 3:
 			 break;
 		 case 4:
+			 showProfile(facebook.getCurrentUser());
 			 break;
 		 case 5:
 			 break;
 		 case 6:
+			 addPost();
 			 break;
 			 
 		 case 7:
@@ -104,11 +109,13 @@ public class Gui {
 	}
 	 
 	 private static User getSelectedUser(int i, VDMSet users ) {
-		  Iterator it=users.iterator();
+		  Iterator<User> it=users.iterator();
 		  int option=1;
 		  while(it.hasNext()) {
+			  //User auxUser = it.next();
+			  User u =it.next();
 			  if(option== i)
-				  return (User) it;
+				  return  u;
 			  option++;
 		  }
 		  return null;
@@ -118,7 +125,7 @@ public class Gui {
 
 	private static void showUsers() {
 		  VDMSet users = facebook.getUsers();
-		  Iterator it=users.iterator();
+		  Iterator<User> it=users.iterator();
 		 int option=1;
 		  while(it.hasNext()) {
 			  User u = (User) it.next();
@@ -128,6 +135,7 @@ public class Gui {
 		  }
 		  option = getNextChoice();
 		  User u = getSelectedUser(option, users);
+		  option=0;
 		  
 		  while(option<1 ||option >3) {
 		  System.out.println("1 - Add Friend");
@@ -142,12 +150,57 @@ public class Gui {
 				userMenu();
 				break;
 			 case 2:
-				 loginMenu();
+				 showProfile(u);
+				 break;
+			 case 3:
+				 userMenu();
 				 break;
 			
 			 }
 			 
 		  
+		
+	}
+
+	private static void showProfile(User user) {
+		System.out.println("#################################################################");
+		System.out.println("############                Profile                  ############");
+		System.out.println("#################################################################\n");
+		
+		System.out.println("Name: " + user.getName());
+		System.out.println("Email: " + user.getEmail());
+		System.out.println("Birthdate: " + user.getBirthday());
+		
+		System.out.println("\n##########################    Post    ##########################\n");
+		
+		Iterator<Post> it = user.getPosts(facebook.getCurrentUser()).iterator();
+		
+	      while(it.hasNext()) {
+	    	  Post aux = it.next();
+	    	  System.out.println(aux);
+	      }
+		
+		System.out.println("PRESS ANY KEY TO GO BACK");
+		readStringfromKeyBoard();
+		userMenu();
+	}
+
+	private static void addPost() {
+		System.out.println("#################################################################");
+		System.out.println("############                Add Post                 ############");
+		System.out.println("#################################################################\n\n");
+		
+		String content;
+		String permission;
+		
+		System.out.println("Contents:");
+		content= readStringfromKeyBoard() ;
+		System.out.println("Permissions (public/family):");
+		permission = readStringfromKeyBoard();
+		
+		facebook.getCurrentUser().addPost(content, permission);
+		
+		userMenu();
 		
 	}
 
@@ -198,7 +251,7 @@ public class Gui {
 			
 			User user = facebook.login(email, password);
 			clearScreen();
-			userMenu(user);
+			userMenu();
 		
 	}
 
