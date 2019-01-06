@@ -41,6 +41,7 @@ operations
 		 
 		 );
 		 
+		 -- Função que verifica as recomendações de amigos 
 		 private friends_recommendations: ()==>()
 		 friends_recommendations() ==
 		 (
@@ -61,6 +62,7 @@ operations
 		 
 		 );
 		 
+		 -- Função que verifica o feed de um utilizador
 		 private feed: ()==>()
 		 feed() ==(
 		  dcl p1:Post := u2.addPost("I am a public post","public");
