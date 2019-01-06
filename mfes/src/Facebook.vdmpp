@@ -54,7 +54,7 @@ operations
 	 	for all u in set friends do(
 		 	dcl friendsOfFriends: set of User := u.getFriends();
 		 	for all f in set friendsOfFriends do(
-			 	if f not in set friends 
+			 	if f not in set friends and f <> currentUser
 			 	then recommendations := {f} union recommendations;
 		 		)
 	 		);
