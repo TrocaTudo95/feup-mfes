@@ -39,11 +39,6 @@ public class Comment {
 
   public String toString() {
 
-    return "Comment{"
-        + "content := "
-        + Utils.toString(content)
-        + ", user := "
-        + Utils.toString(user)
-        + "}";
+    return Utils.toString(content) + " - " +  Utils.toString(user) + "\n";
   }
 }

@@ -255,62 +255,79 @@ public class Gui {
 		
 	}
 	 
-	 
 	 private static void showPosts(VDMSet posts) {
-		  Iterator<Post> it=posts.iterator();
-			 int option=1, reaction=0;
-			  while(it.hasNext()) {
-				  Post u = (Post) it.next();
-				  System.out.print(option +"-");
-				  System.out.println(u);
-				  option ++;
-				  
-			  }
-			  option = getNextChoice();
-			  Post p = getSelecedPost(option,posts);
-			  option = 0;
+		System.out.println("#################################################################");
+		System.out.println("############                Fedd                    ############");
+		System.out.println("#################################################################\n");
+		  
+			
+	  Iterator<Post> it=posts.iterator();
+		 int option=1, reaction=0;
+		  while(it.hasNext()) {
+			  Post u = (Post) it.next();
+			  System.out.print(option +"-");
+			  System.out.println(u);
+			  option ++;
 			  
-			  while(option<1 ||option >4) {
-				  System.out.println("1 - Comment");
-				  System.out.println("2 - Like");
-				  System.out.println("3 - Dislike");
-				  System.out.println("4 - Back");
-				  option = getNextChoice();
-				  }
-				  
-				  switch(option) {
-					 case 1:
-						
-						userMenu();
-						break;
-					 case 2:
-						 System.out.println("\n");
-						 Iterator<String> it2=Post.Reactions.iterator();
-						  while(it2.hasNext()) {
-							  reaction ++;
-							  String u = (String) it2.next();
-							  System.out.print(reaction +"-");
-							  System.out.println(u);
-							  
-						  }
-						  System.out.println("-----------------------------------");
-						  System.out.println("Choose your reaction:");
-						  reaction = getNextChoice();
-						  String rec = getSelectedReaction(reaction,Post.Reactions);
-						 p.like(facebook.currentUser,rec);
-						 
-						 
-						 userMenu();
-						 break;
-					 case 3:
-						 p.dislike(facebook.currentUser);
-						 userMenu();
-						 break;
-					 case 4:
-						 userMenu();
-						 break;
+		  }
+		  
+		  System.out.print("\nPost: ");
+		  option = getNextChoice();
+		  Post p = getSelecedPost(option,posts);
+		  option = 0;
+		  
+		  clearScreen();
+		  System.out.println(p.getContent());
+		  System.out.println("-----------------------------------");
+		  
+		  while(option<1 ||option >4) {
+			  System.out.println("1 - Comment");
+			  System.out.println("2 - Like");
+			  System.out.println("3 - Dislike");
+			  System.out.println("4 - Back");
+			  System.out.print("\nOption: ");
+			  option = getNextChoice();
+			  }
+			  
+			  switch(option) {
+				 case 1:
+				 clearScreen();
+				 System.out.println(p.getContent());
+				 System.out.println("-----------------------------------");
+				 System.out.println("Content: ");
+				 String comment= readStringfromKeyBoard() ;
+				 p.addComment(comment, facebook.getCurrentUser());
 					
-					 }
+					userMenu();
+					break;
+				 case 2:
+					 System.out.println("\n");
+					 Iterator<String> it2=Post.Reactions.iterator();
+					  while(it2.hasNext()) {
+						  reaction ++;
+						  String u = (String) it2.next();
+						  System.out.print(reaction +"-");
+						  System.out.println(u);
+						  
+					  }
+					  System.out.println("-----------------------------------");
+					  System.out.println("Choose your reaction:");
+					  reaction = getNextChoice();
+					  String rec = getSelectedReaction(reaction,Post.Reactions);
+					 p.like(facebook.currentUser,rec);
+					 
+					 
+					 userMenu();
+					 break;
+				 case 3:
+					 p.dislike(facebook.currentUser);
+					 userMenu();
+					 break;
+				 case 4:
+					 userMenu();
+					 break;
+				
+				 }
 	 }
 	private static void showUsers( VDMSet users) {
 		System.out.println("#################################################################");
@@ -460,6 +477,7 @@ public class Gui {
 			jose.addFriend(sofia);
 			
 			sofia.addPost("I am a public post!", "public");
+			sofia.addPost("I am a family post!", "family");
 			
 			initialMenu();
 	 }
