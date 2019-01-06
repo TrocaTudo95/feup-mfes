@@ -50,7 +50,7 @@ operations
  	public dislike :User==>()
  		dislike(u) ==
 	 	likes := {u} <-: likes
-	 	pre true
+	 	pre {u} <: likes <> {|->}
 	 	post likes = {u} <-: likes;
  	
  	public hasLike : User*Reaction ==> map User to String
