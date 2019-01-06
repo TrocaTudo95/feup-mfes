@@ -53,20 +53,28 @@ public class Facebook {
 
   public VDMSet recommendUsers() {
 
-    VDMSet recommendations = SetUtil.set();
-    VDMSet friends = currentUser.getFriends();
-    for (Iterator iterator_4 = friends.iterator(); iterator_4.hasNext(); ) {
-      User u = (User) iterator_4.next();
-      VDMSet friendsOfFriends = u.getFriends();
-      for (Iterator iterator_5 = friendsOfFriends.iterator(); iterator_5.hasNext(); ) {
-        User f = (User) iterator_5.next();
-        if (!(SetUtil.inSet(f, friends))) {
-          recommendations = SetUtil.union(SetUtil.set(f), Utils.copy(recommendations));
-        }
-      }
-    }
-    return Utils.copy(recommendations);
-  }
+	    VDMSet recommendations = SetUtil.set();
+	    VDMSet friends = currentUser.getFriends();
+	    for (Iterator iterator_4 = friends.iterator(); iterator_4.hasNext(); ) {
+	      User u = (User) iterator_4.next();
+	      VDMSet friendsOfFriends = u.getFriends();
+	      for (Iterator iterator_5 = friendsOfFriends.iterator(); iterator_5.hasNext(); ) {
+	        User f = (User) iterator_5.next();
+	        Boolean andResult_3 = false;
+
+	        if (!(SetUtil.inSet(f, friends))) {
+	          if (!(Utils.equals(f, currentUser))) {
+	            andResult_3 = true;
+	          }
+	        }
+
+	        if (andResult_3) {
+	          recommendations = SetUtil.union(SetUtil.set(f), Utils.copy(recommendations));
+	        }
+	      }
+	    }
+	    return Utils.copy(recommendations);
+	  }
 
   public Boolean hasFriend(final User u, final VDMSet us) {
 

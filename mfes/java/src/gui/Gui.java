@@ -472,9 +472,15 @@ public class Gui {
 		public static void main(String [] args) {
 			User sofia = facebook.register("sofia", new User.Date("19/06/1997"),"sofia@gmail.com", "123");
 			User jose = facebook.register("jose", new User.Date("02/12/1997"),"jose@gmail.com", "123");
+			User joao = facebook.register("joao", new User.Date("02/12/1997"),"joao@gmail.com", "123");
+			User rita = facebook.register("rita", new User.Date("02/12/1997"),"rita@gmail.com", "123");
+			User maria = facebook.register("maria", new User.Date("02/12/1997"),"rita@gmail.com", "123");
 			
 			sofia.addFriend(jose);
 			jose.addFriend(sofia);
+			sofia.addFriend(joao);
+			jose.addFriend(rita);
+			joao.addFriend(maria);
 			
 			sofia.addPost("I am a public post!", "public");
 			sofia.addPost("I am a family post!", "family");
