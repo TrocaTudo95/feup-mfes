@@ -82,6 +82,24 @@ class UserTest
 		 assertTrue(u2.getNumberOfFriends() = 0);
 		 );
 		 
+		 --Função para testar alterar a password
+		 private changePassword: ()==>()
+		 changePassword()==
+		 (
+		 assertTrue(u.getPassword() = "123");
+		 u.changePassword("1234");
+		 assertTrue(u.getPassword() = "1234");
+		 );
+		 
+		 --Função para testar alterar o nome
+		 private changeName: ()==>()
+		 changeName()==
+		 (
+		 assertTrue(u.getName() = "Sofia");
+		 u.editName("Joao");
+		 assertTrue(u.getName() = "Joao");
+		 );
+		 
 		 --Função para testar remover amigo da lista de amigos
 		 private removeFriend: ()==>()
 		 removeFriend() ==
@@ -106,6 +124,8 @@ class UserTest
 		 	new UserTest().acceptFriendRequest();
 		  new UserTest().removeFriend();
 		  new UserTest().rejectFriendRequest();
+		  new UserTest().changeName();
+		  new UserTest().changePassword();
 		
 		 );
 end UserTest

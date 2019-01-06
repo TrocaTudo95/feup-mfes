@@ -132,7 +132,19 @@ operations
 	 	return card friends
 	 	pre true
 	 	post RESULT= card friends;
- 	
+	 	
+	public editName : String ==> ()
+		editName(n) ==
+		name := n
+		pre name <> n
+		post name~ <> name and name=n;
+		
+	public changePassword : String ==> ()
+		changePassword(n) ==
+		password := n
+		pre password <> n
+		post password~ <> password and password=n;
+		
  	public getNumberOfPendentRequests : () ==> nat
  		getNumberOfPendentRequests() ==
 	 	return card pendentFriendRequests
