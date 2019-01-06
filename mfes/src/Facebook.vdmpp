@@ -12,6 +12,13 @@ instance variables
 
 
 operations
+/* Função para registar novo utilizador
+@param n nome do utilizador
+@param b data de nascimento do utilizador
+@param e email do utilizador
+@param p password do utilizador
+@return novo user criado
+*/
 	public register : User`String*User`Date*User`String*User`String ==> User
 	register(n,b,e,p) ==(
 	currentUser := new User(n,b,e,p);
@@ -20,6 +27,12 @@ operations
 	)
   post users = {currentUser} union users~ and RESULT=currentUser;
 
+
+/* Função para logar utilizador user previamente criado
+@param e email do utilizador
+@param p password do utilizador
+@return user que logou
+*/
 	public login: User`String*User`String ==> User
 		login(e,p) ==(
 		 for all u in set users do(
@@ -31,22 +44,37 @@ operations
 		 return currentUser;
 		)
 		post RESULT=currentUser;
-
+		
+/* Função para fazer logout da conta do utilizador
+*/
 	public logout: () ==> ()
 	logout()==
 		currentUser := new User();
-
+		
+		
+/* Função para verificar se existe um dado utilizador
+@param u utilizador a testar
+@param p password do utilizador
+@return bool a indicar se o user está registado ou nao
+*/
 	public hasUser : User ==> bool
 		hasUser(u) ==
 	 	return u in set users
 	 	pre true
 	 	post RESULT= u in set users;
- 	
+	 	
+/* Função para retornar o user logado
+@return user logado
+*/
  	public getCurrentUser: () ==> User
  		getCurrentUser() == 
 	 	return currentUser
 	 	post RESULT=currentUser;
-	 	
+
+
+/* Função para recomendar utilizadores ao utilizador logao
+@return set de users recomendados
+*/	 	
  	public recommendUsers: () ==> set of User 
  		recommendUsers() ==(
 	 	dcl recommendations: set of User := {};
@@ -62,13 +90,22 @@ operations
 	 	)
 	 	pre card users >0 and card currentUser.getFriends()>0;
  	
- 	
+ 
+/* Função para verificar se existe um dado utilizador num set de amigos
+@param u utilizador a testar
+@param us set de friends a testar
+@return bool a indicar se o utilizador existe ou não no set de friends
+*/
  	public hasFriend : User*set of User ==> bool
  		hasFriend(u,us) ==
 	 	return u in set us
 	 	pre true
 	 	post RESULT= u in set us;
- 	
+	 	
+
+/* Função para calcular e retornar o feed do utilizador logado
+@return set de posts dos amigos do utilizador logado
+*/ 	
  	public getFeed: () ==> set of Post
  		getFeed() ==(
  	 	dcl friends: set of User := currentUser.getFriends();

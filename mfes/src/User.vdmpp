@@ -21,24 +21,40 @@ instance variables
   password: String;
   
 operations
+/* Construtor da classe utilizador
+@param n nome do utilizador
+@param b data de nascimento do utilizador
+@param e email do utilizador
+@param p password do utilizador
+@return novo user criado
+*/
  	public User : String*Date*String*String ==> User 
  		User(n,b,e,p)==(	
  		name := n; birthday := b;email := e; password := p; return self) 
 		pre len n >0
 		post posts = {} and friends ={} and name = name and pendentFriendRequests={}; 
 
-	
+/* Função para retornar o nome
+@return nome do utilizador 
+*/	
 	public getName:() ==> String 
 		getName() ==
 		return name
 		pre true
 		post RESULT = name;
 	
+/* Função para retornar a data de nascimento
+@return data de nascimento do utilizador 
+*/	
 	public getBirthday: () ==> Date
 		getBirthday() ==
 		return birthday
 		pre true
 		post RESULT=birthday;
+	
+/* Função para retornar o email
+@return email do utilizador 
+*/	
 	
 	public getEmail: () ==> String 
 		getEmail() ==
@@ -46,19 +62,27 @@ operations
 		pre true
 		post RESULT=email;
 
-
+/* Função para retornar a password
+@return password do utilizador 
+*/	
 	pure public getPassword : () ==> String
 		getPassword() ==
 		return password
 		pre true
 		post RESULT=password;
-	
+
+/* Função para retornar os amigos
+@return set de users que representam os amigos do utilizador 
+*/	
 	pure public getFriends : () ==> set of User
 		getFriends() ==
 		return friends
 		pre true
 		post RESULT=friends;
 
+/* Função para retornar os posts feitos pelo utilizador
+@return set de posts que representam os posts do utilizador 
+*/	
 	public getPosts:  User ==> set of Post 
 		getPosts(u) == (
 		dcl res : set of Post :={};
@@ -68,20 +92,31 @@ operations
 			);
 		return res;
 		);
-	
+
+/* Função para adicionar um novo post
+@param c conteúdo do post
+@param p permissão sendo pública ou para a família
+@return novo post criado
+*/	
 	public addPost : String*Post`Permission ==> Post
 		addPost(c,p) ==( 
 		dcl pst: Post := new Post(c,p,self);
 	  posts := {pst} union posts;
 	  return pst)
 	 	post posts = {RESULT} union posts~;
-	 	
+
+/* Função para remover um post
+@param p post a apagar
+*/		 	
 	public removePost : Post ==> ()
 		removePost(p) ==(
 		posts := posts \ {p};
 		)
 		post posts = posts~ \ {p};
- 	
+
+/* Função para aceitar pedido de amizade pendente e adionar relação amigo que é bidirecional
+@param f utilizador a aceitar
+*/	 	
  	public acceptRequest : User ==> ()
  		acceptRequest(f) ==(
  		friends := {f} union friends;
@@ -90,7 +125,10 @@ operations
 	 	)
 	 	pre card friends < 500
 	 	post friends = {f} union friends~ and pendentFriendRequests =pendentFriendRequests~ \{f};
-	 	
+
+/* Função para rejeitar pedido de amizade pendente
+@param f utilizador a rejeitar
+*/		 	
  	public rejectRequest : User==> ()
  		rejectRequest(f) == (
 	 	pendentFriendRequests := pendentFriendRequests \{f}
@@ -98,82 +136,127 @@ operations
 	 	pre f in set pendentFriendRequests
 	 	post f not in set pendentFriendRequests; 
 	 	
+/* Função para enviar pedido de amizade
+@param f utilizador ao qual enviar pedido de amizade
+*/	
  	public sendFriendRequest : User==>()
  		sendFriendRequest(f) ==
 	 	f.addFriendRequest(self);
- 	
+
+/* Função para adicionar amigo ao set de amigos
+@param f utilizador a adicionar
+*/	
  	public addFriend :  User==>()
  		addFriend(f) ==
 	 	friends := {f} union friends
 	 	pre card friends < 500 and f not in set friends and f <> self
 	 	post friends = {f} union friends~;
  	
- 	
+/* Função para adicionar amigo ao set de pedidos pendentes
+@param f utilizador a adicionar
+*/ 	
  	public addFriendRequest : User==>()
  		addFriendRequest(f) ==
 	 	pendentFriendRequests := {f} union pendentFriendRequests
 	 	pre true
 	 	post pendentFriendRequests = {f} union pendentFriendRequests~;
-	 	
+
+/* Função para remover amigo (de forma bidirecional) 
+@param f utilizador a remover
+*/	 	
  	public unfriend : User ==> ()
  		unfriend(f) ==
 	 	(removeFriend(f);
 	 	f.removeFriend(self);
 	 	)
 	 	post f not in set friends;
- 	
+ 
+ /* Função para remover amigo 
+@param f utilizador a remover
+*/	 
  	public removeFriend : User ==> ()
  		removeFriend(f) ==
 	 	friends := friends \{f}
 	 	post friends =friends~ \{f};
 
+/* Função para retornar o numero de amigos
+@return numero de amigos
+*/	 
  	public getNumberOfFriends : () ==> nat
  		getNumberOfFriends() ==
 	 	return card friends
 	 	pre true
 	 	post RESULT= card friends;
 	 	
+/* Função para editar o nome de utilizador
+@param n novo nome do utilizador
+*/	 	 	
 	public editName : String ==> ()
 		editName(n) ==
 		name := n
 		pre name <> n
 		post name~ <> name and name=n;
-		
+
+/* Função para editar a password de utilizador
+@param n nova password do utilizador
+*/	 	
 	public changePassword : String ==> ()
 		changePassword(n) ==
 		password := n
 		pre password <> n
 		post password~ <> password and password=n;
 		
+/* Função para retornar o numero de pedidos de amizade pendentes
+@return numero de pedidos de amizade pendentes
+*/	 		
  	public getNumberOfPendentRequests : () ==> nat
  		getNumberOfPendentRequests() ==
 	 	return card pendentFriendRequests
 	 	pre true
 	 	post RESULT= card pendentFriendRequests;
 	 	
+/* Função para verificar se existe um dado post no feed do user
+@param p post a testar
+@return bool a indicar se o post está no feed ou nao
+*/ 	 	
  	public hasPost : Post ==> bool 
  		hasPost(p) ==
 	 	return p in set posts
 	 	pre true
 	 	post RESULT= p in set posts;
-	 	
+
+/* Função para verificar se existe um dado utilizador nos amigos
+@param u utilizador a testar
+@return bool a indicar se o utilizador tem dado amigo ou nao ou nao
+*/ 	
  	public hasFriend : User ==> bool
  		hasFriend(u) ==
 	 	return u in set friends
 	 	pre true
 	 	post RESULT= u in set friends;
- 	
+ 
+ /* Função para verificar se existe um dado utilizador nos pedidos pendentes ou nao
+@param u utilizador a testar
+@return bool a indicar se o utilizador existe nos pedidos pendentes 
+*/ 	
 	public hasFriendRequest : User ==> bool
 		hasFriendRequest(u) ==
 	 	return u in set pendentFriendRequests
 	 	pre true
 	 	post RESULT= u in set pendentFriendRequests;
- 	
+
+
+/* Função para adicionar um dado utilizador ao grupo restrito família
+@param u utilizador a adicionar
+*/ 		
  	public addToFamily: User ==> ()
 	 	addToFamily(u) == (
 	 	family := {u} union family)
 	 	post family = {u} union family;
- 	
+
+/* Função para retornar a atual permissão de um dado utilizador
+@return permissão atual
+*/  	
  	public getPermission: User ==> Post`Permission
 	 	getPermission(u) ==(
 	 	if u = self
