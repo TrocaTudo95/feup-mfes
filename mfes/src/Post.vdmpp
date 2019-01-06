@@ -18,64 +18,108 @@ instance variables
   content:String;
   
 operations
+	/**
+ * Construtor de posts
+ * @param c Conteúdo do post
+ * @param p Permissões do post
+ * @param u Utilizador que criou o post
+ * @return Post criado
+ */
  	public Post: String*Permission*User ==> Post
  		Post(c,p,o) ==(	
  		content := c; permission:=p; owner:=o; return self)
 		post RESULT= self and content = c and permission = p;
-		
+ /**
+ * Retorna o set de comentários do post
+ * @return Set de comentários
+ */		
 	public pure getComments : () ==> set of Comment
 		getComments() ==
 		return comments
 		post RESULT = comments;
-	
+ /**
+ * Adiciona um novo comentário ao post se o utilizador tiver premissoes para tal
+ * @param c Conteúdo do comentário
+ * @param u Utilizador que realiza o comentário
+ * @return true se o comentário foi adicionado, false caso contrário
+ */	
 	public addComment: String*User ==> bool
 		addComment(c,u) == (
 		dcl comment : Comment := new Comment(c,u);
 		if isAvailable(u)
 		then (comments := {comment} union comments; return true)
 		else return false);
-		
+ /**
+ * Remove um comentário
+ * @param c Comentário a remover
+ */		
 	public removeComment: Comment ==> ()
 		removeComment(c) ==(
 		if(c in set comments)
 		then comments := comments \ {c})
 		pre c in set comments;
-		
+ /**
+ * Utilizador reage a um post
+ * @param u Utilizador que reagiu
+ * @param r Tipo de reação 
+ */		
  	public like : User*Reaction==>()
  		like(u,r) ==
 	 	likes := {u|->r} ++ likes
 	 	pre true
 	 	post likes = {u|->r} ++ likes~;
-
+ /**
+ * Remove a reação de um utilizador
+ * @param u Utilizador que adicionou a reação a remover
+ */
  	public dislike :User==>()
  		dislike(u) ==
 	 	likes := {u} <-: likes
 	 	pre {u} <: likes <> {|->}
 	 	post likes = {u} <-: likes;
- 	
+ /**
+ * Indica se um utilizador reagiu ao post
+ * @param u Utilizar
+ * @param r Reação
+ * @return true se u reacgiu com r ao post, false caso contrário
+ */ 	
  	public hasLike : User*Reaction ==> map User to String
  		hasLike(u,r)  ==
 	 	return {u} <: likes
 	 	pre true
 	 	post RESULT = {u} <: likes;
-
+ /**
+ * Editar o conteúdo de um post
+ * @param c Novo conteúdo do post
+ */
  	public editPost: String ==>()
 	editPost(c) ==(
 	content := c;
 	)
 	post content <> content~;
-
+ /**
+ * Retorna o comentário realizado por um determinado utilizador 
+ * @param u Utilizador
+ * @return Comentário realizado por u 
+ */
 	pure public getCommentFromUser: User ==> Comment
 		getCommentFromUser(u) == (
 		dcl comment:Comment:=iota c in set comments & u=c.getUser();
 		return comment;
-		);
-	
+		); 
+ /**
+ * Retorna o conteúdo do post 
+ * @return Conteúdo do post
+ */	
 	pure public getContent: () ==> String
 		getContent() == (
 		return content;
 		);
-
+ /**
+ * Indica se um determinado utilizador tem permissões para visualizar o post
+ * @param u Utilizador
+ * @return true se u tem permissões para visualizar o post, false caso contrário
+ */
   public isAvailable: User ==> bool
 	 	isAvailable(u) ==(
 	 	if not owner.hasFriend(u) and not owner = u
@@ -85,7 +129,10 @@ operations
 		elseif owner.getPermission(u) = "family"
 		then return true
 		else return false;);
-
+ /**
+ * Retorna o número de comentários do post
+ * @return Número de comentários
+ */
 	pure public getCommentsNumber :  () ==> nat
 		getCommentsNumber() ==
 		return card comments;

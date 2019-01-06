@@ -57,6 +57,7 @@ operations
 		assertTrue(pp.getCommentsNumber() =0);
 	);
 	
+	-- testa editar post
 	private editPost: ()==>()
 	editPost() ==(
 	assertTrue(pp.getContent()="I am a public post!");
@@ -64,6 +65,7 @@ operations
 	assertTrue(pp.getContent()="hello");
 	);
 	
+	-- testa editar comentário
 	private editComment: ()==>()
 	editComment() ==(
 	u2.sendFriendRequest(u);
