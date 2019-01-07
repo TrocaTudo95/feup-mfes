@@ -7,7 +7,7 @@ types
 
 instance variables
 	users: set of User := {};
-	currentUser : User;
+	currentUser : User:= undefined;
 	feed: set of Post := {};
 
 
