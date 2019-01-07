@@ -1,0 +1,48 @@
+class Comment
+types 
+	public String = seq1 of char;
+	
+instance variables
+  content:seq of (char);
+  user: User;
+  
+operations
+ /**
+ * Construtor de comentário
+ * @param c Conteúdo do comentário
+ * @param u Utilizador que realiza o comentário
+ * @return Comentário criado
+ */
+  public Comment: String*User ==> Comment 
+  Comment(c,u)	==(	content :=c;
+		user := u;
+		return self);
+ /**
+ * Editar Comentário
+ * @param c Novo conteúdo do comentário
+ */		
+	public editComment: String ==>()
+	editComment(c) ==(
+	content := c;
+	)
+	post content <> content~;
+ /**
+ * Retorna o utilizador que realizou o comentário
+ * @return Utilizador que realizou o comentário
+ */
+	pure public getUser: () ==> User
+	getUser() ==(
+	return user;
+	);
+/**
+ * Retorna o conteúdo do comentário
+ * @return conteúdo do comentário
+ */
+	pure public getContent: () ==> String
+	getContent() ==(
+	return content;
+	);
+	
+		
+
+end Comment
