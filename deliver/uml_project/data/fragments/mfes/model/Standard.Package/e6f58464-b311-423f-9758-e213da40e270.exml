@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Model" version="4">
+  <OBJECT>
+    <ID name="Model" mc="Standard.Package" uid="e6f58464-b311-423f-9758-e213da40e270"/>
+    <PID name="mfes" mc="Standard.Project" uid="b164ea94-983d-4c65-9c26-6b3a0dbb02b0"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[Model]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="Basic VDM Types" mc="Standard.Package" uid="27888dd1-6f37-4362-80d3-32517473e794"/>
+        <COMPID name="IO" mc="Standard.Class" uid="5551b04f-4cb2-4fa3-85f9-b508abb388a4"/>
+        <COMPID name="VDMUtil" mc="Standard.Class" uid="ed4e6a6e-702d-438b-9235-af5d15760a33"/>
+        <COMPID name="Comment" mc="Standard.Class" uid="54415298-882e-4c24-bc56-91723a8781c6"/>
+        <COMPID name="Facebook" mc="Standard.Class" uid="3ca7fc28-765b-40cc-a1cc-d3219977b10d"/>
+        <COMPID name="Post" mc="Standard.Class" uid="28d9ae92-7689-46fa-be83-ad58954c0b94"/>
+        <COMPID name="User" mc="Standard.Class" uid="0711be2a-cc83-4a6a-8838-93e33cb01d86"/>
+        <COMPID name="FacebookTest" mc="Standard.Class" uid="223b112b-a16e-42a2-af15-045789420c2f"/>
+        <COMPID name="PostTest" mc="Standard.Class" uid="ec03631e-e417-41d5-8f1f-5c5e305cdb94"/>
+        <COMPID name="Test" mc="Standard.Class" uid="95dc2038-efc0-488c-8330-2113bcb4b3b2"/>
+        <COMPID name="UserTest" mc="Standard.Class" uid="23e1e061-ba74-48fb-a462-dbd2596ca881"/>
+        <COMPID name="Composite VDM Types" mc="Standard.Package" uid="3804648e-30bc-4a13-8831-8abb5221f655"/>
+        <COMPID name="Binding classes" mc="Standard.Package" uid="9690ad98-2152-4c41-be83-fc65260f9810"/>
+        <COMPID name="User" mc="Standard.Actor" uid="5ed5286f-0acb-476f-8da5-c5693b8872a4"/>
+        <COMPID name="Friends" mc="Standard.UseCase" uid="08091888-9c2b-47a1-b0b4-6fee0d33c833"/>
+        <COMPID name="Send Fiend Request" mc="Standard.UseCase" uid="f861fe5f-782f-4518-8bae-88d7a9b36cfc"/>
+        <COMPID name="Add Friend" mc="Standard.UseCase" uid="a4039026-84f6-4e98-aea3-851fb6525b96"/>
+        <COMPID name="Reject Friend Request" mc="Standard.UseCase" uid="ea9f4c79-5141-44e2-99cf-8edf9f1095ce"/>
+        <COMPID name="Remove Friend" mc="Standard.UseCase" uid="93ea9ffd-08ee-4d84-802e-b7ffc800a641"/>
+        <COMPID name="Posts" mc="Standard.UseCase" uid="b4f59dd2-849f-4f7b-8711-c84b872acab1"/>
+        <COMPID name="Like" mc="Standard.UseCase" uid="c2e96baa-6e0f-4f5e-a89d-a504ff967d83"/>
+        <COMPID name="Comment" mc="Standard.UseCase" uid="5bf1610f-44f7-40f2-9b62-f9fe25db85a8"/>
+        <COMPID name="Edit" mc="Standard.UseCase" uid="c93a38ff-da73-46b6-ac70-cb008ba8281d"/>
+        <COMPID name="Remove like" mc="Standard.UseCase" uid="1a96fd8e-4a48-43a8-9d1f-207abb43f290"/>
+        <COMPID name="Remove Comment" mc="Standard.UseCase" uid="33d6972f-159f-40b1-9afe-40ec66f84a2e"/>
+        <COMPID name="Friend Recommendations" mc="Standard.UseCase" uid="29729b7d-c2e3-430f-a495-eda35ce77786"/>
+      </COMP>
+      <COMP relation="Product">
+        <COMPID name="Model Class diagram" mc="Standard.ClassDiagram" uid="4255d505-6393-4490-b558-9b9abad8519c"/>
+        <COMPID name="Model Class diagram (1)" mc="Standard.ClassDiagram" uid="c209795a-102f-47f6-88fb-a2bdd9d8d78d"/>
+        <COMPID name="Model Use Case diagram" mc="Standard.UseCaseDiagram" uid="091dee94-7b68-41e1-a1e1-1850c2080a6a"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

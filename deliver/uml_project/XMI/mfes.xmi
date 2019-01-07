@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_H6b4wAoYEemQHpnAnnug-w" name="mfes">
+  <eAnnotations xmi:id="_H6b4wQoYEemQHpnAnnug-w" source="Objing">
+    <contents xmi:type="uml:Property" xmi:id="_H6b4wgoYEemQHpnAnnug-w" name="exporterVersion">
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_H6b4wwoYEemQHpnAnnug-w" value="3.0.0"/>
+    </contents>
+  </eAnnotations>
+</uml:Model>

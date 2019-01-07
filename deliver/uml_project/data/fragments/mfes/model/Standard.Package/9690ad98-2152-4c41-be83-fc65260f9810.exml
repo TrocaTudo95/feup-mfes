@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Binding classes" version="4">
+  <OBJECT>
+    <ID name="Binding classes" mc="Standard.Package" uid="9690ad98-2152-4c41-be83-fc65260f9810"/>
+    <PID name="Model" mc="Standard.Package" uid="e6f58464-b311-423f-9758-e213da40e270"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[Binding classes]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="Seq&lt;char&gt;" mc="Standard.Class" uid="a45f89b5-8221-4c77-b2e4-026fa302a00d"/>
+        <COMPID name="Product&lt;bool,Optional&lt;p&gt;&gt;" mc="Standard.Class" uid="deae81c8-7ff8-4673-9e20-219abeb59e60"/>
+        <COMPID name="Optional&lt;p&gt;" mc="Standard.Class" uid="39fd210e-dc16-4249-8bb2-6749378b0b15"/>
+        <COMPID name="Optional&lt;IO::filedirective&gt;" mc="Standard.Class" uid="0da59baf-a863-4ca4-9a97-9de9d19ee1bd"/>
+        <COMPID name="Seq&lt;Any&gt;" mc="Standard.Class" uid="240f14af-0020-47a5-85ff-3d279dc17cb7"/>
+        <COMPID name="Optional&lt;Product&lt;Seq&lt;char&gt;,nat,nat,Seq&lt;char&gt;,Seq&lt;char&gt;&gt;&gt;" mc="Standard.Class" uid="d082e669-baef-4f35-96eb-99c48ff9f459"/>
+        <COMPID name="Product&lt;Seq&lt;char&gt;,nat,nat,Seq&lt;char&gt;,Seq&lt;char&gt;&gt;" mc="Standard.Class" uid="34756ec4-b793-46a5-9068-7fb0fbe7cd8f"/>
+        <COMPID name="Product&lt;bool,Any&gt;" mc="Standard.Class" uid="af9f7052-a459-4e5b-b476-00329fe9101d"/>
+        <COMPID name="Optional&lt;Seq&lt;char&gt;&gt;" mc="Standard.Class" uid="1b4e0147-e3ba-462a-b332-28bfb51e78e1"/>
+        <COMPID name="Set&lt;User&gt;" mc="Standard.Class" uid="0eeb611c-8aa7-41d5-8929-bfe028ac5b76"/>
+        <COMPID name="Set&lt;Post&gt;" mc="Standard.Class" uid="aa7c9a77-b6fd-46ba-8084-1c3fd8e9dc9a"/>
+        <COMPID name="Set&lt;Post::String&gt;" mc="Standard.Class" uid="e26ab4b5-cc30-4187-9422-cb8e5b5855ca"/>
+        <COMPID name="Set&lt;Comment&gt;" mc="Standard.Class" uid="6d888213-133a-49ee-a385-4597a5005e57"/>
+        <COMPID name="Map&lt;User,Post::Reaction&gt;" mc="Standard.Class" uid="ccb37d3c-b91e-41e6-bba9-d77564a75cdf"/>
+        <COMPID name="Map&lt;User,Post::String&gt;" mc="Standard.Class" uid="f11629ac-fc66-4dcb-9865-2504b9f3acf9"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

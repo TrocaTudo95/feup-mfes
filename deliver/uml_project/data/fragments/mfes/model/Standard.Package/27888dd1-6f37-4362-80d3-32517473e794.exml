@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Basic VDM Types" version="4">
+  <OBJECT>
+    <ID name="Basic VDM Types" mc="Standard.Package" uid="27888dd1-6f37-4362-80d3-32517473e794"/>
+    <PID name="Model" mc="Standard.Package" uid="e6f58464-b311-423f-9758-e213da40e270"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[Basic VDM Types]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="&lt;append&gt;" mc="Standard.DataType" uid="4b95b757-28e6-42b3-ad6e-360c805c181e"/>
+        <COMPID name="&lt;start&gt;" mc="Standard.DataType" uid="63c92968-23af-4640-b4c4-06c9d39e7315"/>
+        <COMPID name="nat" mc="Standard.DataType" uid="047d15e8-97ef-4e72-aa7b-d6ff56712100"/>
+        <COMPID name="bool" mc="Standard.DataType" uid="14954c96-cf1e-4f39-b3b1-5492597a5131"/>
+        <COMPID name="Any" mc="Standard.DataType" uid="5b65b83d-f74d-479b-941a-2cb18abd09e8"/>
+        <COMPID name="Void" mc="Standard.DataType" uid="8e1715a8-6a6a-4f63-bd19-87caff4e209d"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>
